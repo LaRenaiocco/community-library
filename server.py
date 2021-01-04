@@ -20,6 +20,10 @@ def homepage():
 
     return render_template('homepage.html')
 
+@app.route('/profile')
+def render_profile():
+    return render_template('profile.html')
+
 @app.route('/upload-image', methods=['GET', 'POST'])
 def upload_image():
     if request.method == 'POST':

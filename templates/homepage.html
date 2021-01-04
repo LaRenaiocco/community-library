@@ -1,38 +1,15 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width">
-    <script src="https://code.jquery.com/jquery-3.5.1.js"
-    integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc="
-    crossorigin="anonymous">
-    </script>
-    <title>Community Library</title>
-  </head>
-  <body>
-    <H1>This is a web-app</H1>
-    <form id="upload-image-form" action="/upload-image" method="POST" enctype="multipart/form-data">
-      <p>upload an image</p>
-      <input id="image-field" type="file" /> <br />
-      <input id="title-field" type="text" placeholder="Book Title" /> <br />
-      <input id="author-field" type="text" placeholder="Author" /> <br />
-      <input class="genre-field" type="checkbox" name="genre" value="Fiction" /> Fiction <br />
-      <input class="genre-field" type="checkbox" name="genre" value="Nonfiction" /> Nonfiction <br />
-      <input class="genre-field" type="checkbox" name="genre" value="Autobiography" /> Autobiography/Memoir <br />
-      <input class="genre-field" type="checkbox" name="genre" value="Biography" /> Biography <br />
-      <input class="genre-field" type="checkbox" name="genre" value="Childrens" /> Childrens <br />
-      <input class="genre-field" type="checkbox" name="genre" value="YA" /> YA <br />
-      <input class="genre-field" type="checkbox" name="genre" value="SciFi" /> SciFi <br />
-      <input class="genre-field" type="checkbox" name="genre" value="Fantasy" /> Fantasy <br />
-      <input class="genre-field" type="checkbox" name="genre" value="Classics" /> Classics <br />
-      <input class="genre-field" type="checkbox" name="genre" value="Comics" /> Comics/Graphic Novels <br />
-      <textarea id="description-field" cols="20" rows="4">Brief Description (optional)</textarea> <br />
-      <input class="available-field" type="radio" name="availabile" value="yes" checked="checked" /> yes <br />
-      <input class="available-field" type="radio" name="availabile" value="no" /> no <br />
+{% extends 'base.html' %}
+{% block title %}Community Library {% endblock %}
 
-      <input type="submit" />
-    </form>
-    <div id="image-div"></div>
-    <script src="/static/homepage.js"></script>
-  </body>
-</html>
+{% block head %}
+
+{% endblock %}
+
+{% block body %}
+<h1>HOMEPAGE</h1>
+<button id="image-upload-btn">Image Upload</button>
+{% endblock %}
+
+{% block after_body %}
+  <script src="/static/js/homepage.js"></script> 
+{% endblock %}

@@ -1,5 +1,5 @@
 """ Script to seed our database with objects."""
-
+import os
 import crud
 import model
 import server
