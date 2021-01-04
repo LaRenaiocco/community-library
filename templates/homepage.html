@@ -3,12 +3,21 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width">
+    <script src="https://code.jquery.com/jquery-3.5.1.js"
+    integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc="
+    crossorigin="anonymous">
+    </script>
     <title>Community Library</title>
   </head>
   <body>
     <H1>This is a web-app</H1>
-    <form>
-      
+    <form id="upload-image-form" action="/upload-image" method="POST" enctype="multipart/form-data">
+      <p>upload an image</p>
+      <input id="image-field" type="file" />
+      <!-- <input id="image-field" type="file" name="image" /> -->
+      <input type="submit" />
     </form>
+    <div id="image-div"></div>
+    <script src="/static/homepage.js"></script>
   </body>
 </html>
