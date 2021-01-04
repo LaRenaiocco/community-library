@@ -35,7 +35,15 @@
 </div>
 <div>
   CREATE ACCOUNT
-  <form id="new-account-form"></form>
+  <form id="new-account-form" action="/create-user" method="POST">
+    <input id="new-email" type="text" name="email" required="required" placeholder="Email" />
+    <input id="new-password" type="password" name="password" required="required" placeholder="Password" />
+    <input id="new-fname" type="text" name="fname" required="required" placeholder="First Name" />
+    <input id="new-lname" type="text" name="lname" required="required" placeholder="Last Name" />
+    <input id="phone-num" type="number" name="phone" placeholder="Phone Number" 
+    minlength="10" maxlength="10" required="required" />
+    <input id="new-account-submit" type="submit" />
+  </form>
 </div>
 {% endblock %}
 
