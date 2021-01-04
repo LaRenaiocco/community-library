@@ -44,7 +44,7 @@ class Book(db.Model):
     author = db.Column(db.String)
     genre = db.Column(db.String, 
             nullable=True)
-    description = db.Column(db.String,
+    description = db.Column(db.Text,
             nullable=True)
     image_url = db.Column(db.String)
     available = db.Column(db.Boolean)

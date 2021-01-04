@@ -13,8 +13,23 @@
     <H1>This is a web-app</H1>
     <form id="upload-image-form" action="/upload-image" method="POST" enctype="multipart/form-data">
       <p>upload an image</p>
-      <input id="image-field" type="file" />
-      <!-- <input id="image-field" type="file" name="image" /> -->
+      <input id="image-field" type="file" /> <br />
+      <input id="title-field" type="text" placeholder="Book Title" /> <br />
+      <input id="author-field" type="text" placeholder="Author" /> <br />
+      <input class="genre-field" type="checkbox" name="genre" value="Fiction" /> Fiction <br />
+      <input class="genre-field" type="checkbox" name="genre" value="Nonfiction" /> Nonfiction <br />
+      <input class="genre-field" type="checkbox" name="genre" value="Autobiography" /> Autobiography/Memoir <br />
+      <input class="genre-field" type="checkbox" name="genre" value="Biography" /> Biography <br />
+      <input class="genre-field" type="checkbox" name="genre" value="Childrens" /> Childrens <br />
+      <input class="genre-field" type="checkbox" name="genre" value="YA" /> YA <br />
+      <input class="genre-field" type="checkbox" name="genre" value="SciFi" /> SciFi <br />
+      <input class="genre-field" type="checkbox" name="genre" value="Fantasy" /> Fantasy <br />
+      <input class="genre-field" type="checkbox" name="genre" value="Classics" /> Classics <br />
+      <input class="genre-field" type="checkbox" name="genre" value="Comics" /> Comics/Graphic Novels <br />
+      <textarea id="description-field" cols="20" rows="4">Brief Description (optional)</textarea> <br />
+      <input class="available-field" type="radio" name="availabile" value="yes" checked="checked" /> yes <br />
+      <input class="available-field" type="radio" name="availabile" value="no" /> no <br />
+
       <input type="submit" />
     </form>
     <div id="image-div"></div>
