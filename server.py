@@ -2,11 +2,12 @@
 from flask import (Flask, render_template, request, flash, session,
                    redirect, jsonify)
 from jinja2 import StrictUndefined
+from passlib.hash import argon2
+from model import connect_to_db
 import os
 import api
-# import cloudinary
-# import cloudinary.uploader
-# import cloudinary.api
+import crud
+import helper
 
 
 app = Flask(__name__)
@@ -20,9 +21,36 @@ def homepage():
 
     return render_template('homepage.html')
 
-@app.route('/profile')
-def render_profile():
-    return render_template('profile.html')
+@app.route('/login', methods=['POST'])
+def login_user():
+    """ Login user """
+
+    print('login route')
+    email = request.form['email']
+    print(email)
+    incoming_password = request.form['password']
+    user = helper.get_user_by_email(email)
+    if user == None:
+        flash('No account with this email exists. Please try again.')
+        return redirect ('/')
+    else: 
+        if argon2.verify(incoming_password, user.password):
+            session['EMAIL'] = user.email
+            session['NAME'] = user.fname 
+            session['ID'] = user.user_id
+            return redirect (f'profile/{user.fname}')  
+        else:
+            flash('Incorrect Password. Please try again.')
+            return redirect ('/') 
+    # return render_template('profile.html') 
+
+
+
+@app.route('/profile/<fname>')
+def render_profile(fname):
+    """Show user profile"""
+
+    return render_template('profile.html', fname=fname)
 
 @app.route('/upload-image', methods=['GET', 'POST'])
 def upload_image():
@@ -41,5 +69,5 @@ def upload_image():
 
 
 if __name__ == '__main__':
-    # connect_to_db(app)
+    connect_to_db(app)
     app.run(host='0.0.0.0', debug=True)

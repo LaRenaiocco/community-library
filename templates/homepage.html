@@ -8,6 +8,35 @@
 {% block body %}
 <h1>HOMEPAGE</h1>
 <button id="image-upload-btn">Image Upload</button>
+<div>
+  LOGIN
+  <form id="login-form" action="/login" method="POST">
+    <div class="row">
+      <div class="col">
+      </div>
+      <div class="col">
+        <input class="form-control" type="text" name="email" required="required" placeholder="Email" />
+      </div>
+      <div class="col">
+        <input class="form-control" type="password" name="password" required="required" placeholder="Password" />
+      </div>
+      <div class="col">
+      </div>
+    </div>
+    <div>
+      <input id="submit-btn" type="submit" value="Log In" />
+    </div>
+  </form>
+  <!-- <form id="login-form" action="/login" method="POST">
+    <input type="text" required="required" name="email" placeholder="Email" />
+    <input type="password" required="required" name="password" placeholder="Password" />
+    <input type="submit" />
+  </form> -->
+</div>
+<div>
+  CREATE ACCOUNT
+  <form id="new-account-form"></form>
+</div>
 {% endblock %}
 
 {% block after_body %}
