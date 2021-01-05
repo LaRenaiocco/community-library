@@ -1,5 +1,6 @@
 """ Script to seed our database with objects."""
 import os
+import json
 import crud
 import model
 import server
@@ -22,3 +23,22 @@ crud.create_user('Grace@grace.com', 'test', 'Grace', 'Graceful', '+17073182084')
 crud.create_user('Hildy@hildy.com', 'test', 'Hildy', 'Hinter', '+17073182084')
 crud.create_user('Jamie@jamie.com', 'test', 'Jamie', 'Jameson', '+17073182084')
 crud.create_user('Kat@kat.com', 'test', 'Kat', 'King', '+17073182084')
+
+# Create books
+
+with open('data/books.json') as f:
+    book_data = json.loads(f.read())
+
+for book in book_data:
+    title = book['title']
+    author = book['author']
+    genre = book['genre']
+    description = book['description']
+    image_url = book['image_url']
+    owner = int(book['owner'])
+    if book['available'] == 'True':
+        available = True
+    else:
+        available = False
+
+    book_object = crud.create_book(title, author, genre, description, image_url, owner, available)
