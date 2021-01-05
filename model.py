@@ -47,9 +47,10 @@ class Book(db.Model):
     description = db.Column(db.Text,
             nullable=True)
     image_url = db.Column(db.String)
-    available = db.Column(db.Boolean)
     owner = db.Column(db.Integer,
             db.ForeignKey('users.user_id'))
+    available = db.Column(db.Boolean)
+
 
     user = db.relationship('User', backref='book')
 

@@ -17,17 +17,18 @@ def create_user(email, password, fname, lname, phone):
 
     return user
 
-def create_book(title, author, genre, description, image_url, available, owner):
+def create_book(title, author, genre, description, image_url, owner, available=True,):
     book = Book(title=title,
         author=author,
         genre=genre,
         description=description,
         image_url=image_url,
-        available=available,
-        owner=owner)
+        owner=owner,
+        available=available)
 
     db.session.add(book)
-    db.sesion.commit()
+    db.session.commit()
+    print(book)
 
     return book
 

@@ -75,6 +75,8 @@ def render_profile(fname):
 
 @app.route('/upload-image', methods=['GET', 'POST'])
 def upload_image():
+    """Upload image to Cloudinary and database"""
+
     if request.method == 'POST':
         if request.files:
             image = request.files['file']
@@ -82,10 +84,23 @@ def upload_image():
             image_url = api.cloudinary_upload_image(image)
             print('image_uploaded')
             print(image_url)
-    
-    return jsonify(image_url)
+        
+            title = request.form.get('title')
+            author = request.form.get('author')
+            print(title, author)
+            genre = None
+            description = None
+            # if request.form['available'] == 'yes':
+            #     available = True
+            # else:
+            #     available = False
+            available = True
+            owner = session['ID']
+
+            crud.create_book(title, author, genre, description, image_url, owner, available)
 
 
+        return render_template('profile.html', fname=session['NAME'])
 
 
 
