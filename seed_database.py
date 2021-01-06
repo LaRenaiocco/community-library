@@ -25,7 +25,6 @@ crud.create_user('Jamie@jamie.com', 'test', 'Jamie', 'Jameson', '+17073182084')
 crud.create_user('Kat@kat.com', 'test', 'Kat', 'King', '+17073182084')
 
 # Create books
-
 with open('data/books.json') as f:
     book_data = json.loads(f.read())
 

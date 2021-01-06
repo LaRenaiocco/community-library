@@ -24,7 +24,8 @@ $('#upload-image-form').on('submit', (evt) => {
             // $('#image-div').text(response)
         }
     })
+})
 
-
-
+$('#book-search-btn').on('click', () => {
+    document.location.href = '/search'
 })

@@ -9,6 +9,19 @@ def get_user_by_email(email):
 
     return User.query.filter(User.email == email).first()
 
+def get_all_book_data():
+
+    books = Book.query.all()
+    json_books = []
+    for book in books:
+        book_dict = {}
+        book_dict['title'] = book.title
+        book_dict['author'] = book.author
+        book_dict['image_url'] = book.image_url
+        json_books.append(book_dict)
+
+    return json_books
+
 def get_length_of_phone(phone):
     
     if len(phone) == 10:

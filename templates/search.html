@@ -7,6 +7,20 @@
 
 {% block body %}
 <h1>SEARCH</h1>
+<form id="search-form" action="/search" method>
+  <input id="search-input" type="text" name="search" placeholder="Enter search words here..." />
+  <input id="title-radio" type="radio" name="param" value="title" />
+  <label for="title-radio">Title</label>
+  <input type="radio" name="param" value="author" />
+  <label for="author-radio">Author</label>
+  <input id="genre-radio" type="radio" name="param" value="genre" />
+  <label for="genre-radio">Genre</label>
+  <input id="all-radio" type="radio" name="param" value="all" />
+  <label for="all-radio">Search All</label>
+  <input type="submit" />
+</form>
+<button id="browse-all">Browse All Books</button>
+<div id="book-view"></div>
 {% endblock %}
 
 {% block after_body %}

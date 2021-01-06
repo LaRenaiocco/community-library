@@ -3,6 +3,7 @@ from flask import (Flask, render_template, request, flash, session,
                    redirect, jsonify)
 from jinja2 import StrictUndefined
 from passlib.hash import argon2
+import json
 from model import connect_to_db
 import os
 import api
@@ -102,6 +103,16 @@ def upload_image():
 
         return render_template('profile.html', fname=session['NAME'])
 
+@app.route('/search')
+def render_search_page():
+
+    return render_template('search.html')
+
+@app.route('/books/browse-all')
+def return_all_books():
+    """Return all books to front-end"""
+
+    return jsonify(helper.get_all_book_data())
 
 
 if __name__ == '__main__':
