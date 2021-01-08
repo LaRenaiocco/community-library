@@ -7,21 +7,44 @@
 {% block body %}
   <H1>This is a web-app</H1>
   <form id="upload-image-form" action="/upload-image" method="POST" enctype="multipart/form-data">
-    <p>upload an image</p>
+    <label for="image-field">Upload a book image here:</label>
     <input id="image-field" type="file" /> <br />
-    <input id="title-field" type="text" name="title" placeholder="Book Title" /> <br />
-    <input id="author-field" type="text" name="author" placeholder="Author" /> <br />
-    <!-- <input class="genre-field" type="checkbox" name="genre" value="Fiction" /> Fiction <br />
-    <input class="genre-field" type="checkbox" name="genre" value="Nonfiction" /> Nonfiction <br />
-    <input class="genre-field" type="checkbox" name="genre" value="Autobiography" /> Autobiography/Memoir <br />
-    <input class="genre-field" type="checkbox" name="genre" value="Biography" /> Biography <br />
-    <input class="genre-field" type="checkbox" name="genre" value="Childrens" /> Childrens <br />
-    <input class="genre-field" type="checkbox" name="genre" value="YA" /> YA <br />
-    <input class="genre-field" type="checkbox" name="genre" value="SciFi" /> SciFi <br />
-    <input class="genre-field" type="checkbox" name="genre" value="Fantasy" /> Fantasy <br />
-    <input class="genre-field" type="checkbox" name="genre" value="Classics" /> Classics <br />
-    <input class="genre-field" type="checkbox" name="genre" value="Comics" /> Comics/Graphic Novels <br />
-    <textarea id="description-field" name="description" cols="20" rows="4">Brief Description (optional)</textarea> <br />
+    <label for="title-field">Title of book:</label>
+    <input id="title-field" type="text" name="title" placeholder="enter title here..." /> <br />
+    <label for="author-field">Author:</label>
+    <input id="author-field" type="text" name="author" placeholder="enter author here..." /> <br />
+    <div>Choose as many genres as you feel apply!</div>
+    <div class="row">
+      <div class="col">
+        <input class="genre-field" type="checkbox" name="genre" value="fiction" /> Fiction <br />
+        <input class="genre-field" type="checkbox" name="genre" value="action" /> Action/Adventure <br />
+        <input class="genre-field" type="checkbox" name="genre" value="childrens" /> Childrens <br />
+        <input class="genre-field" type="checkbox" name="genre" value="classics" /> Classics <br />
+        <input class="genre-field" type="checkbox" name="genre" value="comics" /> Comics/Graphic Novels <br />
+        <input class="genre-field" type="checkbox" name="genre" value="fantasy" /> Fantasy <br />
+        <input class="genre-field" type="checkbox" name="genre" value="historical" /> Historical Fiction <br />
+      </div>
+      <div class="col">
+        <input class="genre-field" type="checkbox" name="genre" value="horror" /> Horror <br />
+        <input class="genre-field" type="checkbox" name="genre" value="mystery" /> Mystery/Detective <br />
+        <input class="genre-field" type="checkbox" name="genre" value="romance" /> Romance <br />
+        <input class="genre-field" type="checkbox" name="genre" value="scifi" /> Science Fiction <br />
+        <input class="genre-field" type="checkbox" name="genre" value="short" /> Short Stories <br />
+        <input class="genre-field" type="checkbox" name="genre" value="suspense" /> Suspense/Thriller <br />
+        <input class="genre-field" type="checkbox" name="genre" value="ya" /> Young Adult <br />
+      </div>
+      <div class="col">
+        <input class="genre-field" type="checkbox" name="genre" value="nonfiction" /> Nonfiction <br />
+        <input class="genre-field" type="checkbox" name="genre" value="autobiography" /> Autobiography/Memoir <br />
+        <input class="genre-field" type="checkbox" name="genre" value="biography" /> Biography <br />
+        <input class="genre-field" type="checkbox" name="genre" value="cookbook" /> Cookbook <br />
+        <input class="genre-field" type="checkbox" name="genre" value="essay" /> Essays <br />
+        <input class="genre-field" type="checkbox" name="genre" value="history" /> History <br />
+        <input class="genre-field" type="checkbox" name="genre" value="poetry" /> Poetry <br />
+        <input class="genre-field" type="checkbox" name="genre" value="truecrime" /> True Crime <br />
+      </div>
+    </div>
+    <!-- <textarea id="description-field" name="description" cols="20" rows="4">Brief Description (optional)</textarea> <br />
     <input class="available-field" type="radio" name="available" value="yes" checked="checked" /> yes <br />
     <input class="available-field" type="radio" name="available" value="no" /> no <br /> -->
 
