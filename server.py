@@ -114,6 +114,17 @@ def return_all_books():
 
     return jsonify(helper.get_all_book_data())
 
+@app.route('/books/search-books', methods = ['POST'])
+def return_search_results():
+    search_words = request.form.get('search')
+    param = request.form.get('param')
+    result = helper.search_database(search_words, param)
+    # if type(result) == str:
+    #     flash(result)
+    #     return redirect ('/search')
+    # else: 
+    return jsonify(result)
+
 
 if __name__ == '__main__':
     connect_to_db(app)

@@ -7,11 +7,11 @@
 
 {% block body %}
 <h1>SEARCH</h1>
-<form id="search-form" action="/search" method>
+<form id="search-form" action="/books/search-books" method="POST">
   <input id="search-input" type="text" name="search" placeholder="Enter search words here..." />
   <input id="title-radio" type="radio" name="param" value="title" />
   <label for="title-radio">Title</label>
-  <input type="radio" name="param" value="author" />
+  <input id="author-radio" type="radio" name="param" value="author" />
   <label for="author-radio">Author</label>
   <input id="genre-radio" type="radio" name="param" value="genre" />
   <label for="genre-radio">Genre</label>
