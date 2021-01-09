@@ -4,8 +4,7 @@ $('#upload-image-form').on('submit', (evt) => {
     evt.preventDefault();
     console.log('default prevented')
 
-    const selectedGenres = $('#checkboxes input:checked').map(function(i,el){return el.name;}).get();
-
+    const selectedGenres = $('#checkboxes input:checked').map(function(i, el){return el.name;});
     console.log(selectedGenres)
 
     const formData = new FormData();
