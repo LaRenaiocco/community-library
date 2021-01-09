@@ -74,33 +74,32 @@ def render_profile(fname):
 
     return render_template('profile.html', fname=fname)
 
-@app.route('/upload-image', methods=['GET', 'POST'])
+@app.route('/upload-image', methods=['POST'])
 def upload_image():
     """Upload image to Cloudinary and database"""
 
-    if request.method == 'POST':
-        if request.files:
-            image = request.files['file']
-            print(image)
-            image_url = api.cloudinary_upload_image(image)
-            print('image_uploaded')
-            print(image_url)
-        
-            title = request.form.get('title')
-            author = request.form.get('author')
-            genre = request.form.get('genres')
-            description = None
-            # if request.form['available'] == 'yes':
-            #     available = True
-            # else:
-            #     available = False
-            available = True
-            owner = session['ID']
+    if request.files:
+        image = request.files['file']
+        print(image)
+        image_url = api.cloudinary_upload_image(image)
+        print('image_uploaded')
+        print(image_url)
+    
+        title = request.form.get('title')
+        author = request.form.get('author')
+        genre = request.form.get('genres')
+        description = None
+        # if request.form['available'] == 'yes':
+        #     available = True
+        # else:
+        #     available = False
+        available = True
+        owner = session['ID']
 
-            crud.create_book(title, author, genre, description, image_url, owner, available)
+        crud.create_book(title, author, genre, description, image_url, owner, available)
 
 
-        return render_template('profile.html', fname=session['NAME'])
+    return jsonify('Your book has been uploaded')
 
 @app.route('/search')
 def render_search_page():
