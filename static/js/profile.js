@@ -4,7 +4,7 @@ $('#upload-image-form').on('submit', (evt) => {
     evt.preventDefault();
     console.log('default prevented')
 
-    const selectedGenres = $('#checkboxes input:checked').map(function(i, el){return el.name;});
+    const selectedGenres = $('#checkboxes input:checked').map(function(i, el){return el.name;}).get();
     console.log(selectedGenres)
 
     const formData = new FormData();
@@ -22,7 +22,7 @@ $('#upload-image-form').on('submit', (evt) => {
         cache: false,
         processData: false,
         success: (response) => {
-            // console.log(response)
+            console.log('book uploaded')
             // $('#image-div').text(response)
         }
     })

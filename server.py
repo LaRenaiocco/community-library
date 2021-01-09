@@ -88,8 +88,7 @@ def upload_image():
         
             title = request.form.get('title')
             author = request.form.get('author')
-            print(title, author)
-            genre = None
+            genre = request.form.get('genres')
             description = None
             # if request.form['available'] == 'yes':
             #     available = True
