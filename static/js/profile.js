@@ -10,7 +10,9 @@ $('#upload-image-form').on('submit', (evt) => {
     formData.append('file', $('#image-field').prop('files')[0]);
     formData.append('title', $('#title-field').val());
     formData.append('author', $('#author-field').val());
-    formData.append('genres', selectedGenres)
+    formData.append('genres', selectedGenres);
+    formData.append('description', $('#description-field').val());
+
 
     $.ajax({
         type: 'POST',

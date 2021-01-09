@@ -6,13 +6,44 @@
 
 {% block body %}
   <H1>This is a web-app</H1>
-  <form id="upload-image-form" action="/upload-image" method="POST" enctype="multipart/form-data">
-    <label for="image-field">Upload a book image here:</label>
-    <input id="image-field" type="file" /> <br />
-    <label for="title-field">Title of book:</label>
-    <input id="title-field" type="text" name="title" placeholder="enter title here..." /> <br />
-    <label for="author-field">Author:</label>
-    <input id="author-field" type="text" name="author" placeholder="enter author here..." /> <br />
+  <form id="upload-image-form" 
+        action="/upload-image" 
+        method="POST" 
+        enctype="multipart/form-data"
+        >
+    <label for="image-field">
+      Upload a book image here:
+    </label>
+    <input  id="image-field" 
+            type="file" 
+            /> 
+    <br />
+    <label for="title-field">
+      Title of book:
+    </label>
+    <input  id="title-field" 
+            type="text" 
+            name="title" 
+            placeholder="enter title here..." 
+            /> 
+    <br />
+    <label for="author-field">
+      Author:
+    </label>
+    <input  id="author-field" 
+            type="text" 
+            name="author" 
+            placeholder="enter author here..." 
+            /> 
+    <br />
+    <label for="description-field">
+      Include a brief description:
+    </label>
+    <textarea id="description-field" 
+            name="description"  
+            cols="20" rows="4" 
+            placeholder="(Optional...)">
+    </textarea>
     <div>Choose as many genres as you feel apply!</div>
     <div class="row" id="checkboxes">
       <div class="col">
