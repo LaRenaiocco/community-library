@@ -14,6 +14,7 @@ import helper
 app = Flask(__name__)
 app.secret_key = "dev"
 app.jinja_env.undefined = StrictUndefined
+app.config['ALLOWED_IMG_EXT'] = ['PNG', 'JPG', 'JPEG', 'GIF']
 
 
 @app.route('/')
@@ -80,10 +81,13 @@ def upload_image():
 
     if request.files:
         image = request.files['file']
-        print(image)
-        image_url = api.cloudinary_upload_image(image)
-        print('image_uploaded')
-        print(image_url)
+        allowed_filetype = helper.check_img_ext(image)
+
+        if allowed_filetype == True:
+            image_url = api.cloudinary_upload_image(image)
+            print('image_uploaded')
+        else:
+            return jsonify('Please make sure your image file is a .png, .jpg, .jpeg or .gif')
     
         title = request.form.get('title')
         author = request.form.get('author')
@@ -98,7 +102,6 @@ def upload_image():
         owner = session['ID']
 
         crud.create_book(title, author, genre, description, image_url, owner, available)
-
 
     return jsonify('Your book has been uploaded')
 

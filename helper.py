@@ -103,6 +103,21 @@ def get_length_of_phone(phone):
 
 
 
+def check_img_ext(filename):
+    """Check that file upload is an allowable image filetype"""
+
+    if not '.' in filename:
+        return False
+        
+    ext = filename.rsplit('.', 1)[1]
+
+    if ext.upper() in app.config['ALLOWED_IMG_EXT']:
+        return True
+    else:
+        return False
+
+
+
 if __name__ == '__main__':
     from server import app
     connect_to_db(app)
