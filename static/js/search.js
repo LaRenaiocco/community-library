@@ -91,6 +91,10 @@ function compileBookData(data) {
 
 		$('#book-view').append(bookCard)
 
+		borrowBtn.addEventListener('click', () => {
+			alert('This will trigger an event')
+		})
+
 	})
 }
 
