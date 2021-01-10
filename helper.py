@@ -9,6 +9,12 @@ def get_user_by_email(email):
 
     return User.query.filter(User.email == email).first()
 
+def get_user_phone(user_id):
+    """ Look up user phone for twilio text"""
+
+    user =  User.query.get(user_id)
+    return user.phone
+
 
 
 def get_all_book_data():
@@ -34,7 +40,9 @@ def search_database(search_words, param):
         book_list = search_title(search_words)
     elif param == 'author':
         book_list = search_author(search_words)
-    
+    elif param == 'genre':
+        book_list = search_genre(search_words)
+
     if len(book_list) > 0:
         return jsonify_book_list_data(book_list)
     else:
@@ -63,7 +71,10 @@ def search_author(search_words):
 
 def search_genre(search_words):
     """Query database based on genre column"""
-    pass
+    
+    return (Book.query.options(db.joinedload('user'))
+            .filter(Book.genre.ilike(f'%{search_words}%'))
+            .all())
 
 
 
@@ -108,7 +119,7 @@ def check_img_ext(filename):
 
     if not '.' in filename:
         return False
-        
+
     ext = filename.rsplit('.', 1)[1]
 
     if ext.upper() in app.config['ALLOWED_IMG_EXT']:

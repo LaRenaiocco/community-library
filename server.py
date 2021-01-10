@@ -10,9 +10,10 @@ import api
 import crud
 import helper
 
+FLASK_SECRET_KEY = os.environ['FLASK_SECRET_KEY']
 
 app = Flask(__name__)
-app.secret_key = "dev"
+app.secret_key = FLASK_SECRET_KEY
 app.jinja_env.undefined = StrictUndefined
 app.config['ALLOWED_IMG_EXT'] = ['PNG', 'JPG', 'JPEG', 'GIF']
 
@@ -127,6 +128,17 @@ def return_search_results():
     # else: 
     return jsonify(result)
 
+@app.route('/books/borrow-book')
+def send_book_request_text():
+    """Send text request to book owner to facilitate borrow"""
+
+    if session.get('ID') is None:
+        return jsonify('You must be logged in to borrow a book')
+
+    user_id = session['ID']
+    user_name = session['NAME']
+    user_phone = helper.get_user_phone
+    
 
 if __name__ == '__main__':
     connect_to_db(app)
