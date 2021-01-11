@@ -21,13 +21,7 @@ def get_all_book_data():
     """returns data for all books in database"""
 
     books = Book.query.all()
-    json_books = []
-    for book in books:
-        book_dict = {}
-        book_dict['title'] = book.title
-        book_dict['author'] = book.author
-        book_dict['image_url'] = book.image_url
-        json_books.append(book_dict)
+    json_books = jsonify_book_list_data(books)
 
     return json_books
 

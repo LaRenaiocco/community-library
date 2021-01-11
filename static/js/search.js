@@ -46,58 +46,62 @@ $('#search-form').on('submit', (evt) => {
 })
 
 function compileBookData(data) {
-	const d = document;
 	data.forEach(book => {
 		const bookId = book.book_id
 		const title = book.title
 		const author = book.author
 		const url = book.image_url
 		const ownerName = book.owner_name
+		console.log(ownerName)
 		const ownerId = book.owner_id
 		const ownerPhone = book.owner_phone
 
-		const bookCard = d.createElement("div")
-		bookCard.setAttribute("class", "card")
-		bookCard.setAttribute("id", `bookid${bookId}-ownerid${ownerId}`)
-
-		const bookImg = d.createElement("img")
-		bookImg.setAttribute("class", "card-img-top")
-		bookImg.src = url
-		bookCard.appendChild(bookImg)
-
-		const cardBody = d.createElement("div")
-		cardBody.setAttribute("class", "card-body")
-		bookCard.appendChild(cardBody)
-
-		const cardTitle = d.createElement("h5")
-		cardTitle.setAttribute("class", "card-title")
-		cardTitle.textContent = title
-		const cardAuthor = d.createElement("div")
-		cardAuthor.setAttribute("class", "card-text")
-		cardAuthor.textContent = `By: ${author}`
-		const cardOwner = d.createElement("div")
-		cardOwner.setAttribute("class", "card-text")
-		cardOwner.textContent = `Owned by: ${ownerName}`
-		const borrowBtn = d.createElement("button")
-		borrowBtn.textContent = "Borrow Me"
-		const hiddenId = d.createElement("div")
-		hiddenId.hidden = true
-		hiddenId.textContent = `book id: ${bookId} owner id: ${ownerId}`
-		cardBody.appendChild(cardTitle)
-		cardBody.appendChild(cardAuthor)
-		cardBody.appendChild(cardOwner)
-		cardBody.appendChild(borrowBtn)
-		cardBody.appendChild(hiddenId)
-
-		$('#book-view').append(bookCard)
-
-		borrowBtn.addEventListener('click', () => {
-			alert('This will trigger an event')
-		})
+		createBookCard(bookId, title, author, url, ownerName, ownerId)
 
 	})
 }
 
+function createBookCard(bookId, title, author, url, ownerName, ownerId) {
+	const d = document;
+	const bookCard = d.createElement("div")
+	bookCard.setAttribute("class", "card")
+	bookCard.setAttribute("id", `bookid${bookId}-ownerid${ownerId}`)
+
+	const bookImg = d.createElement("img")
+	bookImg.setAttribute("class", "card-img-top")
+	bookImg.src = url
+	bookCard.appendChild(bookImg)
+
+	const cardBody = d.createElement("div")
+	cardBody.setAttribute("class", "card-body")
+	bookCard.appendChild(cardBody)
+
+	const cardTitle = d.createElement("h5")
+	cardTitle.setAttribute("class", "card-title")
+	cardTitle.textContent = title
+	const cardAuthor = d.createElement("div")
+	cardAuthor.setAttribute("class", "card-text")
+	cardAuthor.textContent = `By: ${author}`
+	const cardOwner = d.createElement("div")
+	cardOwner.setAttribute("class", "card-text")
+	cardOwner.textContent = `Owned by: ${ownerName}`
+	const borrowBtn = d.createElement("button")
+	borrowBtn.textContent = "Borrow Me"
+	const hiddenId = d.createElement("div")
+	hiddenId.hidden = true
+	hiddenId.textContent = `book id: ${bookId} owner id: ${ownerId}`
+	cardBody.appendChild(cardTitle)
+	cardBody.appendChild(cardAuthor)
+	cardBody.appendChild(cardOwner)
+	cardBody.appendChild(borrowBtn)
+	cardBody.appendChild(hiddenId)
+
+	$('#book-view').append(bookCard)
+
+	borrowBtn.addEventListener('click', () => {
+		alert('This will trigger an event')
+	})
+}
 // const cardBodyContent = `
 // 	<h5 class="card-title">${title}<h5>
 // 	<div class="card-text>
