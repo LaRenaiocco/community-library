@@ -38,7 +38,7 @@ def get_all_book_data():
 
 
 def search_database(search_words, param):
-    """Quesry database for book search and return data"""
+    """Query database for book search and return data"""
 
     if param == 'title':
         book_list = search_title(search_words)
@@ -111,7 +111,9 @@ def jsonify_user_book_data(book_list):
         book_data = {'book_id': book.book_id,
                 'title': book.title,
                 'author': book.author,
-                'image_url': book.image_url
+                'image_url': book.image_url,
+                'genre': book.genre,
+                'description': book.description
         }
         json_book_list.append(book_data)
 

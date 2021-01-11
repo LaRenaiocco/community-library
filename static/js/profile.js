@@ -5,20 +5,11 @@ $.get('/profile/json', (data) => {
   // const books = data.books
   console.log(typeof data)
   if ( typeof data === "object") {
-    data.forEach(book => {
-			const bookDiv = document.createElement('div')
-			const bookTitle = document.createElement('span')
-			bookTitle.textContent = book.title
-			bookDiv.appendChild(bookTitle)
-			const viewBook = document.createElement('button')
-			viewBook.textContent = 'Book Details'
-			bookDiv.appendChild(viewBook)
-			const editBook = document.createElement('button')
-			editBook.textContent = 'Edit Book'
-			bookDiv.appendChild(editBook)
+		createBookDiv(data)
 
-			$('#user-library-view').append(bookDiv)
-    })
+			// deleteBook.addEventListener('click', () => {
+			// 	alert('Trigger Modal')
+			// })
   }
 })
 
@@ -26,7 +17,6 @@ $.get('/profile/json', (data) => {
 // Sends book information to server for upload to DB and Cloudinary
 $('#upload-image-form').on('submit', (evt) => {
     evt.preventDefault();
-    console.log('default prevented')
 
     const selectedGenres = $('#checkboxes input:checked').map(function(i, el){return el.name;}).get();
     const formData = new FormData();
@@ -47,12 +37,61 @@ $('#upload-image-form').on('submit', (evt) => {
             document.getElementById("upload-image-form").reset();
             console.log('book uploaded')
             alert(response)
-            // $('#image-div').text(response)
+						// $('#image-div').text(response)
+						// $('#user-library-view').append(bookDiv)
         }
     })
 })
+
 
 // redirect to search page
 $('#book-search-btn').on('click', () => {
     document.location.href = '/search'
 })
+
+// Creates Div with all information for one book in library
+function createBookDiv(data) {
+	data.forEach(book => {
+		const bookDiv = document.createElement('div')
+
+		const bookTitle = document.createElement('span')
+		bookTitle.textContent = book.title
+
+		const viewBook = document.createElement('button')
+		viewBook.setAttribute('class', 'view-book-btn')
+		viewBook.textContent = 'Book Details'
+		viewBook.addEventListener('click', () => {
+			$(`#book${book.book_id}`).toggle()
+			})
+
+		const deleteBook = document.createElement('button')
+		deleteBook.setAttribute('class', 'delete-book-btn')
+		deleteBook.textContent = 'Delete Book'
+
+		bookDiv.appendChild(bookTitle)
+		bookDiv.appendChild(viewBook)
+		bookDiv.appendChild(deleteBook)
+
+		const additionalInfo = document.createElement('div')
+		additionalInfo.setAttribute('id', `book${book.book_id}`)
+		additionalInfo.setAttribute('style', 'display: none')
+
+		const bookAuthor = document.createElement('div')
+		bookAuthor.textContent = `By: ${book.author}`
+
+		const bookGenres = document.createElement('div')
+		bookGenres.textContent = `Genres: ${book.genre}`
+
+		const bookDescription = document.createElement('div')
+		bookDescription.textContent = `Description ${book.description}`
+
+		additionalInfo.appendChild(bookAuthor)
+		additionalInfo.appendChild(bookGenres)
+		additionalInfo.appendChild(bookDescription)
+
+		bookDiv.appendChild(additionalInfo)
+
+		$('#user-library-view').append(bookDiv)
+
+		})
+}
