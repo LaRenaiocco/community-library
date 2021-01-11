@@ -100,7 +100,7 @@ def get_profile_info():
     """Get profile information for render"""
 
     user_id = session.get('ID')
-    return helper.get_user_books(user_id)
+    return jsonify(helper.get_user_books(user_id))
 
 
 @app.route('/upload-image', methods=['POST'])

@@ -2,8 +2,24 @@
 
 // Render books owned by user
 $.get('/profile/json', (data) => {
-    const books = data.books
-    console.log(books)
+  // const books = data.books
+  console.log(typeof data)
+  if ( typeof data === "object") {
+    data.forEach(book => {
+			const bookDiv = document.createElement('div')
+			const bookTitle = document.createElement('span')
+			bookTitle.textContent = book.title
+			bookDiv.appendChild(bookTitle)
+			const viewBook = document.createElement('button')
+			viewBook.textContent = 'Book Details'
+			bookDiv.appendChild(viewBook)
+			const editBook = document.createElement('button')
+			editBook.textContent = 'Edit Book'
+			bookDiv.appendChild(editBook)
+
+			$('#user-library-view').append(bookDiv)
+    })
+  }
 })
 
 

@@ -21,9 +21,11 @@ def get_user_books(user_id):
     """ Look up all books owned by a user"""
 
     books = Book.query.filter(Book.owner == user_id).all()
-    json_books = jsonify_user_book_data(books)
-
-    return json_books
+    if len(books) > 0:
+        json_books = jsonify_user_book_data(books)
+        return json_books
+    else:
+        return "User has no books"
 
 
 def get_all_book_data():
@@ -50,7 +52,7 @@ def search_database(search_words, param):
     if len(book_list) > 0:
         return jsonify_book_search_data(book_list)
     else:
-        return"""'No books match your search request. 
+        return"""No books match your search request. 
 Please check your spelling or try fewer search words."""
 
 
