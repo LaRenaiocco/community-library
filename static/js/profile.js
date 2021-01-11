@@ -5,11 +5,9 @@ $.get('/profile/json', (data) => {
   // const books = data.books
   console.log(typeof data)
   if ( typeof data === "object") {
-		createBookDiv(data)
-
-			// deleteBook.addEventListener('click', () => {
-			// 	alert('Trigger Modal')
-			// })
+		data.forEach(book => {
+			createBookDiv(book)
+		})
   }
 })
 
@@ -36,9 +34,11 @@ $('#upload-image-form').on('submit', (evt) => {
         success: (response) => {
             document.getElementById("upload-image-form").reset();
             console.log('book uploaded')
-            alert(response)
+						// alert(response)
+						const bookDiv = createBookDiv(response)
+						console.log(response)
 						// $('#image-div').text(response)
-						// $('#user-library-view').append(bookDiv)
+						$('#user-library-view').append(bookDiv)
         }
     })
 })
@@ -50,48 +50,48 @@ $('#book-search-btn').on('click', () => {
 })
 
 // Creates Div with all information for one book in library
-function createBookDiv(data) {
-	data.forEach(book => {
-		const bookDiv = document.createElement('div')
+function createBookDiv(book) {
+	const bookDiv = document.createElement('div')
 
-		const bookTitle = document.createElement('span')
-		bookTitle.textContent = book.title
+	const bookTitle = document.createElement('span')
+	bookTitle.textContent = book.title
 
-		const viewBook = document.createElement('button')
-		viewBook.setAttribute('class', 'view-book-btn')
-		viewBook.textContent = 'Book Details'
-		viewBook.addEventListener('click', () => {
-			$(`#book${book.book_id}`).toggle()
-			})
+	const viewBook = document.createElement('button')
+	viewBook.setAttribute('class', 'view-book-btn')
+	viewBook.textContent = 'Book Details'
+	viewBook.addEventListener('click', () => {
+		$(`#book${book.book_id}`).toggle()
+	})
 
-		const deleteBook = document.createElement('button')
-		deleteBook.setAttribute('class', 'delete-book-btn')
-		deleteBook.textContent = 'Delete Book'
+	const deleteBook = document.createElement('button')
+	deleteBook.setAttribute('class', 'delete-book-btn')
+	deleteBook.textContent = 'Delete Book'
+	deleteBook.addEventListener('click', () => {
+		alert('Trigger Modal')
+	})
 
-		bookDiv.appendChild(bookTitle)
-		bookDiv.appendChild(viewBook)
-		bookDiv.appendChild(deleteBook)
+	bookDiv.appendChild(bookTitle)
+	bookDiv.appendChild(viewBook)
+	bookDiv.appendChild(deleteBook)
 
-		const additionalInfo = document.createElement('div')
-		additionalInfo.setAttribute('id', `book${book.book_id}`)
-		additionalInfo.setAttribute('style', 'display: none')
+	const additionalInfo = document.createElement('div')
+	additionalInfo.setAttribute('id', `book${book.book_id}`)
+	additionalInfo.setAttribute('style', 'display: none')
 
-		const bookAuthor = document.createElement('div')
-		bookAuthor.textContent = `By: ${book.author}`
+	const bookAuthor = document.createElement('div')
+	bookAuthor.textContent = `By: ${book.author}`
 
-		const bookGenres = document.createElement('div')
-		bookGenres.textContent = `Genres: ${book.genre}`
+	const bookGenres = document.createElement('div')
+	bookGenres.textContent = `Genres: ${book.genre}`
 
-		const bookDescription = document.createElement('div')
-		bookDescription.textContent = `Description ${book.description}`
+	const bookDescription = document.createElement('div')
+	bookDescription.textContent = `Description: ${book.description}`
 
-		additionalInfo.appendChild(bookAuthor)
-		additionalInfo.appendChild(bookGenres)
-		additionalInfo.appendChild(bookDescription)
+	additionalInfo.appendChild(bookAuthor)
+	additionalInfo.appendChild(bookGenres)
+	additionalInfo.appendChild(bookDescription)
 
-		bookDiv.appendChild(additionalInfo)
+	bookDiv.appendChild(additionalInfo)
 
-		$('#user-library-view').append(bookDiv)
-
-		})
+	$('#user-library-view').append(bookDiv)
 }

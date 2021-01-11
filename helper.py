@@ -120,6 +120,19 @@ def jsonify_user_book_data(book_list):
     return json_book_list
 
 
+def jsonify_new_book(book):
+    """return json object of newly uploaded book"""
+
+    book_data = {'book_id': book.book_id,
+                'title': book.title,
+                'author': book.author,
+                'image_url': book.image_url,
+                'genre': book.genre,
+                'description': book.description
+    }
+    return book_data
+
+
 def get_length_of_phone(phone):
     """check length of phone number for validity
         Type(int) is already coded into html input"""
@@ -133,13 +146,15 @@ def get_length_of_phone(phone):
 def check_img_ext(filename):
     """Check that file upload is an allowable image filetype"""
 
+    allowed_image_ext = ['PNG', 'JPG', 'JPEG', 'GIF']
+
     if not '.' in filename:
         return False
 
     ext = filename.split('.')[1]
 
-    if ext.upper() in app.config['ALLOWED_IMG_EXT']:
-        return True
+    if ext.upper() in allowed_image_ext:
+        return True 
     else:
         return False
 
