@@ -1,5 +1,12 @@
 "use strict"
 
+// Render books owned by user
+$.get('/profile/json', (data) => {
+    const books = data.books
+    console.log(books)
+})
+
+
 // Sends book information to server for upload to DB and Cloudinary
 $('#upload-image-form').on('submit', (evt) => {
     evt.preventDefault();
@@ -12,7 +19,6 @@ $('#upload-image-form').on('submit', (evt) => {
     formData.append('author', $('#author-field').val());
     formData.append('genres', selectedGenres);
     formData.append('description', $('#description-field').val());
-
 
     $.ajax({
         type: 'POST',

@@ -87,11 +87,21 @@ def reroute_to_profile():
     fname = session.get('NAME')
     return redirect (f'profile/{fname}')
 
+
 @app.route('/profile/<fname>')
 def render_profile(fname):
     """Show user profile"""
 
     return render_template('profile.html', fname=fname)
+
+
+@app.route('/profile/json')
+def get_profile_info():
+    """Get profile information for render"""
+
+    user_id = session.get('ID')
+    return helper.get_user_books(user_id)
+
 
 @app.route('/upload-image', methods=['POST'])
 def upload_image():
