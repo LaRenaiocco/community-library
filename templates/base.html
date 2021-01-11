@@ -11,7 +11,7 @@
         crossorigin="anonymous"/>
     <!-- <link href="https://fonts.googleapis.com/css2?family=Major+Mono+Display&family=Montserrat&display=swap" 
           rel="stylesheet"> -->
-    <!-- <link rel="icon" href="/static/favicon.png"> -->
+    <link rel="icon" href="/static/assets/favicon-32x32.png">
     <link rel="stylesheet" href="/static/css/my-styles.css"/>    
     <script src="https://code.jquery.com/jquery-3.5.1.js"
               integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc="
@@ -25,6 +25,36 @@
         {{ msg }}
       </p>
     {% endfor %}
+    <nav class="navbar navbar-light navbar-expand-lg">
+      <img src="/static/assets/community-library-navbar.png" height="75" class="d-inline-block align-top" alt="">
+        <!-- <div class="nav navbar-nav navbar-right">
+          <a class="nav-item nav-link" href="#">My Profile</a>
+          <a class="nav-item nav-link" href="#">Search</a>
+          <a class="nav-item nav-link" href="#">Logout</a>
+        </div>
+    </nav>
+    <nav class="navbar  navbar-light bg-light">
+      <a class="navbar-brand" href="#">Navbar</a> -->
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav">
+          <li class="nav-item active">
+            <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/profile">My Profile</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/search">Search</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/logout">Logout</a>
+          </li>
+        </ul>
+      </div>
+    </nav>
     {% block body %}{% endblock %}
 
     {% block after_body %}{% endblock %} 

@@ -44,6 +44,13 @@ def login_user():
             flash('Incorrect Password. Please try again.')
             return redirect ('/') 
 
+@app.route('/logout')
+def logout_user():
+    """Clear session and logout user"""
+
+    session.clear()
+    return redirect('/')
+
 @app.route('/create-user', methods=['POST'])
 def create_user():
     """Create new user account"""
@@ -69,6 +76,16 @@ def create_user():
         return redirect ('/')
 
 
+
+@app.route('/profile')
+def reroute_to_profile():
+    """obtain username to reroute to profile"""
+    if session.get('ID') is None:
+        flash('You must be logged in to view your profile')
+        return redirect ('/')
+    
+    fname = session.get('NAME')
+    return redirect (f'profile/{fname}')
 
 @app.route('/profile/<fname>')
 def render_profile(fname):
@@ -138,7 +155,7 @@ def send_book_request_text():
     user_id = session['ID']
     user_name = session['NAME']
     user_phone = helper.get_user_phone
-    
+
 
 if __name__ == '__main__':
     connect_to_db(app)
