@@ -77,6 +77,34 @@ button {
     border-color: black;
 }
 
+.delete-book-btn, .view-book-btn, .cancel-btn {
+    height: 25px;
+    width: 100px;
+    padding: 1px;
+    font-size: x-small;
+    border: 1px solid black;
+    border-radius: .25rem;
+    transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+}
+
+.delete-book-btn {
+    background-color: #f58eaa;
+}
+
+.view-book-btn, .cancel-btn {
+    background-color: #f7e28e;
+}
+
+#image-field {
+    margin-bottom: 5px;
+}
+
+#book-search-btn, #new-book-submit {
+    background-color: rgb(147, 221, 243);
+    font-family: 'Yusei Magic', sans-serif;
+    border: 1px solid black;
+}
+
 /* #new-email, #new-password, #new-fname, 
 #new-lname, #phone-num {
     background-color: #f1e6b6;

@@ -98,12 +98,14 @@ function createBookDiv(book) {
 	delMessage.textContent = `Are you sure you want to delete ${book.title} from your library?`
 
 	const cancelBtn = document.createElement('button')
+	cancelBtn.setAttribute('class', 'cancel-btn')
 	cancelBtn.textContent = 'Cancel'
 	cancelBtn.addEventListener('click', () => {
 		$(`#delete${book.book_id}`).toggle()
 	})
 
 	const deleteBtn = document.createElement('button')
+	deleteBtn.setAttribute('class', 'delete-book-btn')
 	deleteBtn.textContent = 'DELETE'
 	deleteBtn.addEventListener('click', () => {
 		$.post('/delete-book', {book: `${book.book_id}`}, (response) => {
