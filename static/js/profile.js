@@ -1,6 +1,6 @@
 "use strict"
 
-// Render books owned by user
+Render books owned by user
 $.get('/profile/json', (data) => {
   // const books = data.books
   console.log(typeof data)
@@ -52,6 +52,7 @@ $('#book-search-btn').on('click', () => {
 // Creates Div with all information for one book in library
 function createBookDiv(book) {
 	const bookDiv = document.createElement('div')
+	bookDiv.setAttribute('class', 'col')
 
 	const bookTitle = document.createElement('span')
 	bookTitle.textContent = book.title
@@ -67,7 +68,6 @@ function createBookDiv(book) {
 	deleteBook.setAttribute('class', 'delete-book-btn')
 	deleteBook.textContent = 'Delete Book'
 	deleteBook.addEventListener('click', () => {
-		console.log('Trigger Modal')
 		$(`#delete${book.book_id}`).toggle()
 	})
 
@@ -120,13 +120,9 @@ function createBookDiv(book) {
 
 	bookDiv.appendChild(additionalInfo)
 	bookDiv.appendChild(deleteInfo)
-	// bookDiv.appendChild(createDeleteModal())
 
-	$('#user-library-view').append(bookDiv)
+	return bookDiv
+	// $('#user-library-view').append(bookDiv)
 }
 
-// function deleteBook(bookId) {
-// 	console.log(`book id: ${bookId}`)
-// 	alert('deleting book')
-// }
 

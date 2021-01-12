@@ -58,7 +58,7 @@ def search_database(search_words, param):
     elif param == 'genre':
         book_list = search_genre(search_words)
     elif param == 'all':
-        pass
+        book_list = search_all(search_words)
 
     if len(book_list) > 0:
         return jsonify_book_search_data(book_list)
@@ -93,7 +93,14 @@ def search_genre(search_words):
 
 def search_all(search_words):
     """Query Database from all columns"""
-    pass
+
+    return (Book.query.filter( (Book.title.ilike(f'%{search_words}%')) 
+        | (Book.author.ilike(f'%{search_words}%')) 
+        | (Book.genre.ilike(f'%{search_words}%')) 
+        | (Book.description.ilike(f'%{search_words}%')) ).all())
+
+
+
 
 
 def jsonify_book_search_data(book_list):
@@ -177,6 +184,24 @@ def create_public_id_for_image(book_id):
     filename = url.split('/')[-1]
     public_id = filename.split('.')[0]
     return public_id
+
+
+def prepare_data_for_text(book_id, user_id):
+    """prepare necessary data for twilio text message"""
+    
+    user = User.query.get(user_id)
+    user_phone = user.phone
+    user_name = user.fname
+    book = (Book.query.options(db.joinedload('user'))
+            .filter(Book.book_id == book_id).first())
+    book_title = book.title
+    owner_phone = book.user.phone
+
+    return {'user_name': user_name,
+            'user_phone': user_phone,
+            'book_title': book_title,
+            'owner_phone': owner_phone
+            }
 
 
 

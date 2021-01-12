@@ -13,6 +13,8 @@ $('#browse-all').on('click', () => {
 	})
 })
 
+
+
 $('#search-form').on('submit', (evt) => {
 	evt.preventDefault()
 
@@ -56,10 +58,54 @@ function compileBookData(data) {
 		const ownerId = book.owner_id
 		const ownerPhone = book.owner_phone
 
-		createBookCard(bookId, title, author, url, ownerName, ownerId)
+		const bookCard = createBookCard(bookId, title, author, url, ownerName, ownerId)
 
 	})
 }
+
+// function compileBookData(data) {
+// 	const container = document.createElement('div')
+// 	container.setAttribute('class', 'container')
+
+// 	data.forEach((book,i) => {
+// 		const bookId = book.book_id
+// 		const title = book.title
+// 		const author = book.author
+// 		const url = book.image_url
+// 		const ownerName = book.owner_name
+// 		console.log(ownerName)
+// 		const ownerId = book.owner_id
+// 		const ownerPhone = book.owner_phone
+
+// 		const bookCard = createBookCard(bookId, title, author, url, ownerName, ownerId)
+// 		if (i === 0 || i % 3 === 0) {
+// 			const row = document.createElement('div')
+// 			row.setAttribute('class', 'row')
+// 		}
+// 	})
+// }
+
+// $.get('/profile/json', (data) => {
+// 	// const books = data.books
+// 	console.log(typeof data)
+// 	if ( typeof data === "object") {
+// 		  const container = document.createElement('div')
+// 		  container.setAttribute('class', 'container')
+// 		  data.forEach(book, i => {
+// 			  if (i === 0 || i % 3 === 0) {
+// 				  const row = document.createElement('div')
+// 				  row.setAttribute('class', 'row')
+// 				  container.appendChild(row)
+// 				  const bookDiv = createBookDiv(book)
+// 				  row.appendChild(bookDiv)
+// 			  } else {
+// 				  const bookDiv = createBookDiv(book)
+// 				  row.appendChild(bookDiv)
+// 			  }
+// 		  })
+// 		  $('#user-library-view').append(container)
+// 	}
+//   })
 
 function createBookCard(bookId, title, author, url, ownerName, ownerId) {
 	const d = document;
@@ -86,7 +132,14 @@ function createBookCard(bookId, title, author, url, ownerName, ownerId) {
 	cardOwner.setAttribute("class", "card-text")
 	cardOwner.textContent = `Owned by: ${ownerName}`
 	const borrowBtn = d.createElement("button")
-	borrowBtn.textContent = "Borrow Me"
+  borrowBtn.textContent = "Borrow Me"
+  borrowBtn.setAttribute('style', 'display: block')
+  borrowBtn.setAttribute('id', `borrow-btn-${bookId}`)
+  borrowBtn.addEventListener('click', () => {
+    $(`#borrow${bookId}`).toggle()
+    $(`#borrow-btn-${bookId}`).toggle()
+    
+	})
 	const hiddenId = d.createElement("div")
 	hiddenId.hidden = true
 	hiddenId.textContent = `book id: ${bookId} owner id: ${ownerId}`
@@ -94,13 +147,40 @@ function createBookCard(bookId, title, author, url, ownerName, ownerId) {
 	cardBody.appendChild(cardAuthor)
 	cardBody.appendChild(cardOwner)
 	cardBody.appendChild(borrowBtn)
-	cardBody.appendChild(hiddenId)
+  cardBody.appendChild(hiddenId)
+  
+  const borrowDiv = d.createElement('div')
+  borrowDiv.setAttribute('id', `borrow${bookId}`)
+	borrowDiv.setAttribute('style', 'display: none')
+		
+
+	const borrowText = d.createElement('div')
+	borrowText.textContent = 'By clicking "Borrow" you authorize Community Library to share your phone number with the book owner to facilitate this swap.'
+
+		
+	const cancel = d.createElement('button')
+	cancel.textContent = 'Cancel'
+	cancel.addEventListener('click', () =>{
+    $(`#borrow${bookId}`).toggle()
+    $(`#borrow-btn-${bookId}`).toggle()
+	})
+		
+  const authorize = d.createElement('button')
+	authorize.textContent = 'Borrow'
+	authorize.addEventListener('click', () => {
+    $.post('/books/borrow-book', {'book': bookId}, (response) => {
+      alert(response)
+    })
+  })
+    
+  borrowDiv.appendChild(borrowText)
+  borrowDiv.appendChild(cancel)
+  borrowDiv.appendChild(authorize)
+  bookCard.appendChild(borrowDiv)
 
 	$('#book-view').append(bookCard)
+	// return bookCard
 
-	borrowBtn.addEventListener('click', () => {
-		alert('This will trigger an event')
-	})
 }
 // const cardBodyContent = `
 // 	<h5 class="card-title">${title}<h5>

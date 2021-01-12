@@ -174,17 +174,19 @@ def return_search_results():
     # else: 
     return jsonify(result)
 
-@app.route('/books/borrow-book')
+@app.route('/books/borrow-book', methods=['POST'])
 def send_book_request_text():
     """Send text request to book owner to facilitate borrow"""
 
     if session.get('ID') is None:
         return jsonify('You must be logged in to borrow a book')
 
-    user_id = session['ID']
-    user_name = session['NAME']
-    user_phone = helper.get_user_phone
+    book_id = request.form.get('book')
+    user_id = session.get('ID')
+    text_data = helper.prepare_data_for_text(book_id, user_id)
+    api.borrow_book_text(text_data)
 
+    return jsonify('text sent')
 
 if __name__ == '__main__':
     connect_to_db(app)

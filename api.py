@@ -35,8 +35,13 @@ def cloudinary_delete_image(public_id):
 
 
 # TWILIO
-def borrow_book_text(recipient_phone, requestor_phone, book_title, requestor_name):
+def borrow_book_text(data):
+    """Takes in a dictionary of data to facilitate text to book owner"""
 
+    recipient_phone = data['owner_phone']
+    requestor_phone = data['user_phone']
+    book_title = data['book_title']
+    requestor_name = data['user_name']
     client = Client(TWILIO_ACCOUNT_SID, TWILIO_AUTH_TOKEN)
 
     message = client.messages.create(
