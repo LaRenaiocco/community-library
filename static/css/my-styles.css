@@ -1,8 +1,8 @@
 .card {
-    width: 15rem;
+    width: 14rem;
     display: inline-block;
     padding: 5px;
-    margin: 10px
+    margin: 5px
 }
 
 /* .card {display:inline-block;} */
