@@ -1,9 +1,7 @@
 "use strict"
 
-Render books owned by user
+// Render books owned by user
 $.get('/profile/json', (data) => {
-  // const books = data.books
-  console.log(typeof data)
   if ( typeof data === "object") {
 		data.forEach(book => {
 			createBookDiv(book)
@@ -16,6 +14,7 @@ $.get('/profile/json', (data) => {
 $('#upload-image-form').on('submit', (evt) => {
     evt.preventDefault();
 
+		// prepare formData object
     const selectedGenres = $('#checkboxes input:checked').map(function(i, el){return el.name;}).get();
     const formData = new FormData();
     formData.append('file', $('#image-field').prop('files')[0]);
@@ -33,11 +32,8 @@ $('#upload-image-form').on('submit', (evt) => {
         processData: false,
         success: (response) => {
             document.getElementById("upload-image-form").reset();
-            console.log('book uploaded')
-						// alert(response)
+						alert('Book added to your personal library')
 						const bookDiv = createBookDiv(response)
-						console.log(response)
-						// $('#image-div').text(response)
 						$('#user-library-view').append(bookDiv)
         }
     })
@@ -60,6 +56,7 @@ function createBookDiv(book) {
 	const viewBook = document.createElement('button')
 	viewBook.setAttribute('class', 'view-book-btn')
 	viewBook.textContent = 'Book Details'
+	// event listener toggles additional book info
 	viewBook.addEventListener('click', () => {
 		$(`#book${book.book_id}`).toggle()
 	})
@@ -67,6 +64,7 @@ function createBookDiv(book) {
 	const deleteBook = document.createElement('button')
 	deleteBook.setAttribute('class', 'delete-book-btn')
 	deleteBook.textContent = 'Delete Book'
+	// event listener toggles book delete options
 	deleteBook.addEventListener('click', () => {
 		$(`#delete${book.book_id}`).toggle()
 	})
@@ -122,7 +120,6 @@ function createBookDiv(book) {
 	bookDiv.appendChild(deleteInfo)
 
 	return bookDiv
-	// $('#user-library-view').append(bookDiv)
 }
 
 
