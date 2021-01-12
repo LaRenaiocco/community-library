@@ -133,8 +133,24 @@ def upload_image():
         owner = session['ID']
 
         new_book = crud.create_book(title, author, genre, description, image_url, owner, available)
-
+        print(new_book)
     return jsonify(helper.jsonify_new_book(new_book))
+
+@app.route('/delete-book', methods=['POST'])
+def delete_image():
+    """delete image from database and cloudinary"""
+    book_id = request.form.get('book')
+    user_id = session.get('ID')
+    authorized = helper.check_user_matches_book_owner(book_id, user_id)
+    
+    if authorized == True:
+        public_id = helper.create_public_id_for_image(book_id)
+        api.cloudinary_delete_image(public_id)
+        crud.delete_book(book_id)
+
+        return jsonify('Book Deleted')
+    else:
+        return jsonify('You are not authorized to delete this book')
 
 @app.route('/search')
 def render_search_page():

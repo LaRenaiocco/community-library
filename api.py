@@ -21,9 +21,18 @@ def cloudinary_upload_image(image_data):
     """Uploads user image to Cloudinary API"""
     if image_data:
         response = cloudinary.uploader.upload(image_data)
+        print(response)
         image_url = response['secure_url']
 
     return image_url
+
+def cloudinary_delete_image(public_id):
+    """Removes user image from Cloudinary API"""
+
+    response = cloudinary.uploader.destroy(public_id)
+    result = response['result']
+    return result
+
 
 # TWILIO
 def borrow_book_text(recipient_phone, requestor_phone, book_title, requestor_name):

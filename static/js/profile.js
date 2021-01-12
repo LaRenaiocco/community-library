@@ -67,7 +67,8 @@ function createBookDiv(book) {
 	deleteBook.setAttribute('class', 'delete-book-btn')
 	deleteBook.textContent = 'Delete Book'
 	deleteBook.addEventListener('click', () => {
-		alert('Trigger Modal')
+		console.log('Trigger Modal')
+		$(`#delete${book.book_id}`).toggle()
 	})
 
 	bookDiv.appendChild(bookTitle)
@@ -91,7 +92,41 @@ function createBookDiv(book) {
 	additionalInfo.appendChild(bookGenres)
 	additionalInfo.appendChild(bookDescription)
 
+	const deleteInfo = document.createElement('div')
+	deleteInfo.setAttribute('id', `delete${book.book_id}`)
+	deleteInfo.setAttribute('style', 'display: none')
+
+	const delMessage = document.createElement('div')
+	delMessage.textContent = `Are you sure you want to delete ${book.title} from your library?`
+
+	const cancelBtn = document.createElement('button')
+	cancelBtn.textContent = 'Cancel'
+	cancelBtn.addEventListener('click', () => {
+		$(`#delete${book.book_id}`).toggle()
+	})
+
+	const deleteBtn = document.createElement('button')
+	deleteBtn.textContent = 'DELETE'
+	deleteBtn.addEventListener('click', () => {
+		$.post('/delete-book', {book: `${book.book_id}`}, (response) => {
+			bookDiv.remove()
+			alert(response)
+		})
+	})
+
+	deleteInfo.appendChild(delMessage)
+	deleteInfo.appendChild(cancelBtn)
+	deleteInfo.appendChild(deleteBtn)
+
 	bookDiv.appendChild(additionalInfo)
+	bookDiv.appendChild(deleteInfo)
+	// bookDiv.appendChild(createDeleteModal())
 
 	$('#user-library-view').append(bookDiv)
 }
+
+// function deleteBook(bookId) {
+// 	console.log(`book id: ${bookId}`)
+// 	alert('deleting book')
+// }
+

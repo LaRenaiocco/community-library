@@ -27,6 +27,17 @@ def get_user_books(user_id):
     else:
         return "User has no books"
 
+def check_user_matches_book_owner(book_id, user_id):
+    """Make sure logged in user matches book owner"""
+
+    book = Book.query.get(book_id)
+    if user_id == book.owner:
+        return True
+    else:
+        return False
+
+
+
 
 def get_all_book_data():
     """returns data for all books in database"""
@@ -157,6 +168,15 @@ def check_img_ext(filename):
         return True 
     else:
         return False
+
+def create_public_id_for_image(book_id):
+    """pulls public id from url for cloudinary delete"""
+
+    book = Book.query.get(book_id)
+    url = book.image_url
+    filename = url.split('/')[-1]
+    public_id = filename.split('.')[0]
+    return public_id
 
 
 

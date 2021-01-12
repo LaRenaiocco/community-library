@@ -28,9 +28,17 @@ def create_book(title, author, genre, description, image_url, owner, available=T
 
     db.session.add(book)
     db.session.commit()
-    print(book)
+    print(f'crud.create_book {book}')
 
     return book
+
+def delete_book(book_id):
+
+    book = Book.query.get(book_id)
+    db.session.delete(book)
+    db.session.commit()
+
+    return 
 
 if __name__ == '__main__':
     from server import app
