@@ -18,9 +18,9 @@ $('#search-form').on('submit', (evt) => {
 	const formData = {'search': search, 'param': param}
 
 	$.post('/books/search-books', formData, (response) => {
-		// clear our the book-view display
+		// clear out the book-view display
 		$('#book-view').empty()
-		
+		// string will be an error alert. Object will be successful data query
 		if( typeof response === "string" ) {
 			alert(response)
 			document.getElementById("search-form").reset();
