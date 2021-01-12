@@ -1,8 +1,27 @@
+/* font-family: 'Lato', sans-serif;
+font-family: 'Yusei Magic', sans-serif; */
+
+body {
+    font-family: 'Lato', sans-serif;
+    font-size: small;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-family: 'Yusei Magic', sans-serif;
+}
+
+button {
+    margin: 2px;
+}
+
 .card {
     width: 14rem;
     display: inline-block;
     padding: 5px;
-    margin: 5px
+    margin: 5px;
+    font-size: smaller;
 }
 
-/* .card {display:inline-block;} */
+/* .view-book-btn {
+    width: 20px;
+} */

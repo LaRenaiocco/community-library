@@ -2,7 +2,7 @@
 
 // Render books owned by user
 $.get('/profile/json', (data) => {
-  if ( typeof data === "object") {
+	if ( typeof data === "object") {
 		data.forEach(book => {
 			createBookDiv(book)
 		})
@@ -119,7 +119,7 @@ function createBookDiv(book) {
 	bookDiv.appendChild(additionalInfo)
 	bookDiv.appendChild(deleteInfo)
 
-	return bookDiv
+	$('#user-library-view').append(bookDiv)
 }
 
 
