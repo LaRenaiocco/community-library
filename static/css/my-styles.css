@@ -4,13 +4,16 @@ font-family: 'Yusei Magic', sans-serif; */
 body {
     font-family: 'Lato', sans-serif;
     font-size: small;
+    margin: 5px;
 }
 
 h1, h2, h3, h4, h5, h6 {
     font-family: 'Yusei Magic', sans-serif;
+    text-align: center;
 }
 
 button {
+    font-family: 'Yusei Magic', sans-serif;
     margin: 2px;
 }
 
@@ -20,6 +23,10 @@ button {
     padding: 5px;
     margin: 5px;
     font-size: smaller;
+}
+
+#book-search-btn {
+    width: 100%;
 }
 
 /* .view-book-btn {
