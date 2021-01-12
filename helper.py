@@ -111,10 +111,11 @@ def jsonify_book_search_data(book_list):
         book_data = {'book_id': book.book_id,
                 'title': book.title,
                 'author': book.author,
+                'description': book.description,
+                'genre': book.genre,
                 'image_url': book.image_url,
                 'owner_name': book.user.fname,
                 'owner_id': book.owner,
-                'owner_phone': book.user.phone,
         }
         json_book_list.append(book_data)
 
