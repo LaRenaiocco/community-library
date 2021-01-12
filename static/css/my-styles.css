@@ -25,9 +25,72 @@ button {
     font-size: smaller;
 }
 
+.homepage-row {
+    margin: 20px;
+    margin-bottom: 30px;
+}
+
+#homepage-body {
+    background-image: url(/static/assets/homepage-image.jpg);
+    height: 100%;
+    position: relative;
+    background-position: center;
+    background-repeat: repeat-y;
+    background-size: cover;
+}
+#homepage-container {
+    background-color: rgba(253, 249, 255, 0.8);
+    margin: 75px;
+}
+
+#logo-div {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#search-div {
+    text-align: center;
+}
+
+#search-button, #new-account-submit {
+    color: black;
+    background-color: #ffde59;
+    border-color: black;
+    width: 200px;
+}
+#submit-btn {
+    color: black;
+    background-color: #ffde59;
+    border-color: black;
+    width: 100px;
+}
+
 #book-search-btn {
     width: 100%;
 }
+
+.my-forms {
+    background-color: #f1e6b6;
+    margin: 5px;
+    width: 200px;
+    border-color: black;
+}
+
+/* #new-email, #new-password, #new-fname, 
+#new-lname, #phone-num {
+    background-color: #f1e6b6;
+    margin: 5px;
+    width: 200px;
+    border-color: black;
+}
+
+#new-account-submit {
+    background-color: #ffde59;
+    margin: 5px;
+    width: 200px;
+    border-color: black;
+} */
 
 /* .view-book-btn {
     width: 20px;

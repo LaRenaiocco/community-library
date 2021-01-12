@@ -6,59 +6,120 @@
     </title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" 
-        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" 
-        crossorigin="anonymous"/>
-    <!-- <link href="https://fonts.googleapis.com/css2?family=Major+Mono+Display&family=Montserrat&display=swap" 
-          rel="stylesheet"> -->
-    <link rel="icon" href="/static/assets/favicon-32x32.png">
-    <link rel="stylesheet" href="/static/css/my-styles.css"/>    
+    <link rel="stylesheet" 
+          href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" 
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" 
+          crossorigin="anonymous"/>
+    <link rel="stylesheet"
+          href="https://fonts.googleapis.com/css2?family=Lato&family=Yusei+Magic&display=swap">
+    <link rel="icon" 
+          href="/static/assets/favicon-32x32.png">
+    <link rel="stylesheet" 
+          href="/static/css/my-styles.css"/>    
     <script src="https://code.jquery.com/jquery-3.5.1.js"
-              integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc="
-              crossorigin="anonymous">
+            integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc="
+            crossorigin="anonymous">
     </script>
   </head>
-  <body>
+  <body id="homepage-body">
     {% for msg in get_flashed_messages() %}
       <p class="flash-msg">
         {{ msg }}
       </p>
     {% endfor %}
-  <h1>HOMEPAGE</h1>
-  <div>
-    LOGIN
-    <form id="login-form" action="/login" method="POST">
-      <div class="row">
-        <div class="col">
-        </div>
-        <div class="col">
-          <input class="form-control" type="text" name="email" required="required" placeholder="Email" />
-        </div>
-        <div class="col">
-          <input class="form-control" type="password" name="password" required="required" placeholder="Password" />
-        </div>
-        <div class="col">
-        </div>
+  <div id="homepage-container">
+    <div class="row homepage-row">
+      <div class="col-3 homepage-col" id="logo-div">
+        <img id="logo" src="/static/assets/community-library-logo.png" height="200px" />
       </div>
-      <div>
-        <input id="submit-btn" type="submit" value="Log In" />
+      <div class="col-9 homepage-col">
+        <h3>Welcome to the Community Library</h3>
+        <h6>a fullstack project by LaRena Iocco.</h6>
+        This idea was inspired by a variety of things: 
+        <ul>
+          <li>My love of books and the library</li>
+          <li>My inability to go to the library due to the pandemic</li>
+          <li>The media exchange table at my local park</li>
+          <li>"Buy Nothing" groups on social media</li>
+        </ul>
+        What if you could be a part of an online community that was centered around 
+        your geographic location and find books to borrow from your neighbors?
       </div>
-    </form>
-  </div>
-  <div>
-    CREATE ACCOUNT
-    <form id="new-account-form" action="/create-user" method="POST">
-      <input id="new-email" type="text" name="email" required="required" placeholder="Email" />
-      <input id="new-password" type="password" name="password" required="required" placeholder="Password" />
-      <input id="new-fname" type="text" name="fname" required="required" placeholder="First Name" />
-      <input id="new-lname" type="text" name="lname" required="required" placeholder="Last Name" />
-      <input id="phone-num" type="number" name="phone" placeholder="Phone Number" 
-              minlength="10" maxlength="10" required="required" />
-      <input id="new-account-submit" type="submit" />
-    </form>
-  </div>
-  <div>
-    <button id="search-button" class="btn btn-primary">Search Books</button>
+    </div>
+    <div class="row homepage-row">
+      <div class="col-6 homepage-col">
+        Feel free to explore the search functionality and sample
+        books without signing up for an account!
+      </div>
+      <div class="col-6 homepage-col" id="search-div">
+        <div id="search-button" class="btn">Search Books</div>
+      </div>
+    </div>
+    <div class="row homepage-row">
+      <div class="col-6 homepage-col">
+        <h5>CREATE ACCOUNT:</h5>
+        <form id="new-account-form" action="/create-user" method="POST">
+          <div class="row">
+            <div class="col">
+              <input class="form-control my-forms" id="new-email" type="text" name="email" 
+                      required="required" placeholder="Email" />
+            </div>
+            <div class="col">
+              <input class="form-control my-forms" id="new-password" type="password" name="password" 
+                      required="required" placeholder="Password" />
+            </div>
+          </div>
+          <div class="row">
+            <div class="col">
+              <input class="form-control my-forms" id="new-fname" type="text" name="fname" 
+                      required="required" placeholder="First Name" />
+            </div>
+            <div class="col">
+              <input class="form-control my-forms" id="new-lname" type="text" name="lname" 
+                      required="required" placeholder="Last Name" />
+            </div>
+          </div>
+          <div class="row">
+            <div class="col">
+              <input class="form-control my-forms" id="phone-num" type="number" name="phone" 
+                      placeholder="Phone Number" minlength="10" maxlength="10" 
+                      required="required" />
+            </div>
+            <div class="col">
+              <input class="form-control my-forms" id="new-account-submit" type="submit" />
+            </div>
+          </div>
+        </form>
+      </div>
+      <div class="col-6 homepage-col">
+        You'll need to create an account if you want to test out 
+        the other features such as viewing your library, 
+        "borrowing" books, and adding books to your library 
+        (and the database and cloudinary image repository).
+      </div>
+    </div>
+    <div class="row homepage-row">
+      <div class="col-5 homepage-col">
+        <h6>Already have an account? Login here:</h6>
+      </div>
+      <div class="col-7 homepage-col">
+        <form id="login-form" action="/login" method="POST">
+          <div class="row">
+            <div class="col-md-auto">
+              <input class="form-control my-forms" type="text" name="email" 
+                      required="required" placeholder="Email" />
+            </div>
+            <div class="col-md-auto">
+              <input class="form-control my-forms" type="password" name="password" 
+                      required="required" placeholder="Password" />
+            </div>
+            <div class="col-md-auto">
+              <input class="form-control" id="submit-btn" type="submit" value="Log In" />
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
   </div>
     <script src="/static/js/homepage.js"></script> 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" 
