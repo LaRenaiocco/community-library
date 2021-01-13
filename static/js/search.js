@@ -79,13 +79,13 @@ function createBookCard(bookId, title, author, description, genre, url, ownerNam
 	cardOwner.textContent = `Owned by: ${ownerName}`
 	cardBody.appendChild(cardOwner)
 
-	if (genre !== null) {
+	if (genre !== 'None' && genre !== null) {
 		const cardGenre = d.createElement('div')
 		cardGenre.setAttribute("class", "card-text")
 		cardGenre.textContent = `Genres: ${genre}`
 		cardBody.appendChild(cardGenre)
 	}
-	if (description !== null) {
+	if (description !== 'None' && description !== null) {
 		const cardDescription = d.createElement('div')
 		cardDescription.setAttribute("class", "card-text")
 		cardDescription.textContent = `Description: ${description}`
@@ -94,7 +94,8 @@ function createBookCard(bookId, title, author, description, genre, url, ownerNam
 	const borrowBtn = d.createElement("button")
   borrowBtn.textContent = "Borrow Me"
   borrowBtn.setAttribute('style', 'display: block')
-  borrowBtn.setAttribute('id', `borrow-btn-${bookId}`)
+	borrowBtn.setAttribute('id', `borrow-btn-${bookId}`)
+	borrowBtn.setAttribute('class', 'btn search-page-btns search-submit')
   borrowBtn.addEventListener('click', () => {
     $(`#borrow${bookId}`).toggle()
     $(`#borrow-btn-${bookId}`).toggle()
@@ -106,16 +107,18 @@ function createBookCard(bookId, title, author, description, genre, url, ownerNam
 	borrowDiv.setAttribute('style', 'display: none')
 	
 	const borrowText = d.createElement('div')
-	borrowText.textContent = 'By clicking "Borrow" you authorize Community Library to share your phone number with the book owner to facilitate this swap.'
+	borrowText.textContent = `By clicking "Borrow" you authorize Community Library to share your phone number with ${ownerName} to facilitate this swap.`
 
 	const cancel = d.createElement('button')
+	cancel.setAttribute('class', 'btn search-page-btns')
 	cancel.textContent = 'Cancel'
 	cancel.addEventListener('click', () =>{
     $(`#borrow${bookId}`).toggle()
     $(`#borrow-btn-${bookId}`).toggle()
 	})
 		
-  const authorize = d.createElement('button')
+	const authorize = d.createElement('button')
+	authorize.setAttribute('class', 'btn search-page-btns')
 	authorize.textContent = 'Borrow'
 	authorize.addEventListener('click', () => {
     $.post('/books/borrow-book', {'book': bookId}, (response) => {

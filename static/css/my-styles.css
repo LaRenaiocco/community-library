@@ -95,6 +95,16 @@ button {
     background-color: #f7e28e;
 }
 
+.search-page-btns {
+    background-color: rgb(147, 221, 243);
+    font-family: 'Yusei Magic', sans-serif;
+    border: 1px solid black;
+}
+
+.search-submit {
+    width: 215px;
+}
+
 #image-field {
     margin-bottom: 5px;
 }
