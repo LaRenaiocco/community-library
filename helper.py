@@ -1,8 +1,7 @@
-""" Helper functions"""
-
+""" Helper functions for Community Library app"""
 from model import (db, User, Book, connect_to_db)
-# import json
-# import os
+
+"""Search Queries"""
 
 def get_user_by_email(email):
     """Look up user by email."""
@@ -11,14 +10,14 @@ def get_user_by_email(email):
 
 
 def get_user_phone(user_id):
-    """ Look up user phone for twilio text"""
+    """Look up user phone for twilio text"""
 
     user =  User.query.get(user_id)
     return user.phone
 
 
 def get_user_books(user_id):
-    """ Look up all books owned by a user"""
+    """Look up all books owned by a user"""
 
     books = Book.query.filter(Book.owner == user_id).all()
     if len(books) > 0:
@@ -26,6 +25,7 @@ def get_user_books(user_id):
         return json_books
     else:
         return "User has no books"
+
 
 def check_user_matches_book_owner(book_id, user_id):
     """Make sure logged in user matches book owner"""
@@ -37,10 +37,8 @@ def check_user_matches_book_owner(book_id, user_id):
         return False
 
 
-
-
 def get_all_book_data():
-    """returns data for all books in database"""
+    """Get data for all books in database"""
 
     books = Book.query.all()
     json_books = jsonify_book_search_data(books)
@@ -49,7 +47,7 @@ def get_all_book_data():
 
 
 def search_database(search_words, param):
-    """Query database for book search and return data"""
+    """Query database based on search parameters and return data"""
 
     if param == 'title':
         book_list = search_title(search_words)
@@ -57,7 +55,7 @@ def search_database(search_words, param):
         book_list = search_author(search_words)
     elif param == 'genre':
         book_list = search_genre(search_words)
-    elif param == 'all':
+    else:
         book_list = search_all(search_words)
 
     if len(book_list) > 0:
@@ -100,11 +98,8 @@ def search_all(search_words):
         | (Book.description.ilike(f'%{search_words}%')) ).all())
 
 
-
-
-
 def jsonify_book_search_data(book_list):
-    """return json list of database query for front end render"""
+    """return json list of database query for front-end"""
 
     json_book_list = []
     for book in book_list:
@@ -123,7 +118,7 @@ def jsonify_book_search_data(book_list):
 
 
 def jsonify_user_book_data(book_list):
-    """return json list of books owned by 1 user"""
+    """Return json list of books owned by 1 user"""
 
     json_book_list = []
     for book in book_list:
@@ -152,6 +147,8 @@ def jsonify_new_book(book):
     return book_data
 
 
+"""Prepare data for API's and Database"""
+
 def get_length_of_phone(phone):
     """check length of phone number for validity
         Type(int) is already coded into html input"""
@@ -170,20 +167,22 @@ def check_img_ext(filename):
     if not '.' in filename:
         return False
 
-    ext = filename.split('.')[1]
+    ext = filename.split('.')[-1]
 
     if ext.upper() in allowed_image_ext:
         return True 
     else:
         return False
 
+
 def create_public_id_for_image(book_id):
-    """pulls public id from url for cloudinary delete"""
+    """Creates public id from url for cloudinary delete"""
 
     book = Book.query.get(book_id)
     url = book.image_url
     filename = url.split('/')[-1]
     public_id = filename.split('.')[0]
+    
     return public_id
 
 
