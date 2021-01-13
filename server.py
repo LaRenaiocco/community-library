@@ -186,7 +186,7 @@ def send_book_request_text():
     text_data = helper.prepare_data_for_text(book_id, user_id)
     api.borrow_book_text(text_data)
 
-    return jsonify('text sent')
+    return jsonify('A borrow request has been sent to the owner')
 
 if __name__ == '__main__':
     connect_to_db(app)

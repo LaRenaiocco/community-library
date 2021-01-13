@@ -64,7 +64,7 @@ function createBookCard(bookId, title, author, description, genre, url, ownerNam
 	cardBody.setAttribute("class", "card-body")
 	bookCard.appendChild(cardBody)
 
-	const cardTitle = d.createElement("h5")
+	const cardTitle = d.createElement("h6")
 	cardTitle.setAttribute("class", "card-title")
 	cardTitle.textContent = title
 	cardBody.appendChild(cardTitle)

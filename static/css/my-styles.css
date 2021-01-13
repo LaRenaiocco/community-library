@@ -30,6 +30,10 @@ button {
     margin-bottom: 30px;
 }
 
+.profile-col-1 {
+    font-size: x-small
+}
+
 #homepage-body {
     background-image: url(/static/assets/homepage-image.jpg);
     height: 100%;
