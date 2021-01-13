@@ -99,10 +99,31 @@ button {
     margin-bottom: 5px;
 }
 
-#book-search-btn, #new-book-submit {
+#book-search-btn, #new-book-submit, 
+#search-submit-btn, #browse-all {
     background-color: rgb(147, 221, 243);
     font-family: 'Yusei Magic', sans-serif;
     border: 1px solid black;
+}
+
+#search-bar-div {
+    text-align: center;
+}
+
+/* #search-input {
+    margin-left: 200px;
+    margin-right: 200px;
+} */
+
+#search-submit-btn, #browse-all {
+    height: auto;
+    padding: 1px;
+    margin-top: 2px;
+}
+
+#radios {
+    text-align: left;
+    font-size: medium;
 }
 
 /* #new-email, #new-password, #new-fname, 

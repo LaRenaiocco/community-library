@@ -6,20 +6,38 @@
 {% endblock %}
 
 {% block body %}
-<h1>SEARCH</h1>
+<div id="search-bar-div">
+<h3>SEARCH</h3>
 <form id="search-form" action="/books/search-books" method="POST">
-  <input id="search-input" type="text" name="search" placeholder="Enter search words here..." />
-  <input id="title-radio" type="radio" name="param" value="title" />
-  <label for="title-radio">Title</label>
-  <input id="author-radio" type="radio" name="param" value="author" />
-  <label for="author-radio">Author</label>
-  <input id="genre-radio" type="radio" name="param" value="genre" />
-  <label for="genre-radio">Genre</label>
-  <input id="all-radio" type="radio" name="param" value="all" />
-  <label for="all-radio">Search All</label>
-  <input type="submit" />
+  <div class="row">
+    <div class="col-2"></div>
+    <div class="col-8">
+      <input id="search-input" class="form-control" type="text" name="search" 
+              placeholder="Enter search word or words here..."/>
+    </div>
+    <div class="col-2"></div>
+  </div>
+  <div class="row">
+    <div class="col-2"></div>
+    <div class="col-4" id="radios">
+      <input id="title-radio" type="radio" name="param" value="title" />
+      <label for="title-radio">Title  </label>
+      <input id="author-radio" type="radio" name="param" value="author" />
+      <label for="author-radio">Author  </label>
+      <input id="genre-radio" type="radio" name="param" value="genre" />
+      <label for="genre-radio">Genre  </label>
+      <input id="all-radio" type="radio" name="param" value="all" />
+      <label for="all-radio">Search All  </label>
+    </div>
+    <div class="col-2">
+      <input class="form-control" id="search-submit-btn" type="submit" />
+    </div>
+    <div class="col-2">
+      <button class="form-control" id="browse-all">Browse All Books</button>
+    </div>
+    <div class="col-2"
+  </div>
 </form>
-<button id="browse-all">Browse All Books</button>
 <div id="book-view"></div>
 {% endblock %}
 
