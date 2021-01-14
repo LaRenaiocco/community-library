@@ -1,6 +1,7 @@
 """Data models for Community Library"""
 
 from flask_sqlalchemy import SQLAlchemy
+YOUR_PHONE_NUMBER = os.environ['YOUR_PHONE_NUMBER']
 
 db = SQLAlchemy()
 
@@ -57,6 +58,38 @@ class Book(db.Model):
     def __repr__(self):
         return f'<Book Object - book_id: {self.book_id}, title: {self.title} owner: {self.owner}>'
 
+
+def example_data():
+    """Data for tests"""
+
+    User.query.delete()
+    Book.query.delete()
+
+
+    user1 = User(email='Alex@alex.com', 
+				password='test', 
+				fname='Alex', 
+                lname='Arbour', 
+				phone=YOUR_PHONE_NUMBER)
+    user2 = User(email='Bobby@bobby.com', 
+				password='test', 
+				fname='Bobby',
+                lname='Bobbington', 
+				phone=YOUR_PHONE_NUMBER)
+    book1 = Book(title='Pride and Prejudice', 
+				author='Jane Austen', 
+				genre='fiction, classics',
+				description='Regency romantic comedy', 
+				image_url="https://res.cloudinary.com/rosieslibrary/image/upload/v1609811718/Books/pride_and_prejudice_bj6ppu.jpg",
+				owner=1,
+				available=True)
+
+
+    db.session.add_all([user1, user2, book1])
+    db.session.commit()
+
+
+	
 if __name__ == '__main__':
     from server import app
     connect_to_db(app)
