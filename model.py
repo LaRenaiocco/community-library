@@ -1,6 +1,7 @@
 """Data models for Community Library"""
 
 from flask_sqlalchemy import SQLAlchemy
+import os
 YOUR_PHONE_NUMBER = os.environ['YOUR_PHONE_NUMBER']
 
 db = SQLAlchemy()
@@ -89,7 +90,7 @@ def example_data():
     db.session.commit()
 
 
-	
+
 if __name__ == '__main__':
     from server import app
     connect_to_db(app)

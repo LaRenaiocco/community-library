@@ -70,6 +70,7 @@ def create_user():
     else: 
         phone = '+1' + phone
 
+
     if user != None:
         flash('This email is already associated with an account. Please log in.')
         return redirect ('/')
