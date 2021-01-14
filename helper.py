@@ -182,7 +182,7 @@ def create_public_id_for_image(book_id):
     url = book.image_url
     filename = url.split('/')[-1]
     public_id = filename.split('.')[0]
-    
+
     return public_id
 
 

@@ -85,6 +85,31 @@ class CrudAndHelperTests(TestCase):
         crud.delete_book(book_id)
         self.assertFalse(Book.query.get(book_id))
 
+    def test_get_user_by_email(self):
+        """Tests get user by email database query"""
+
+        u = helper.get_user_by_email('Alex@alex.com')
+        self.assertIsNotNone(u.user_id)
+
+    def test_get_user_phone(self):
+        """Tests get user phone database query"""
+
+        p = helper.get_user_phone(1)
+        self.assertIsNotNone(p)
+
+    def test_get_user_books_true(self):
+        """ Tests get user's books database query with books"""
+
+        result = helper.get_user_books(1)
+        self.assertIsInstance(result, list)
+
+    def test_get_user_books_false(self):
+        """Tests get user's books database query with no books"""
+        
+        result = helper.get_user_books(2)
+        self.assertIsInstance(result, str)
+
+
 
 if __name__ == '__main__':
     unittest.main()
