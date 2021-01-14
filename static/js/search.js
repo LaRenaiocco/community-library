@@ -79,13 +79,13 @@ function createBookCard(bookId, title, author, description, genre, url, ownerNam
 	cardOwner.textContent = `Owned by: ${ownerName}`
 	cardBody.appendChild(cardOwner)
 
-	if (genre !== 'None' && genre !== null) {
+	if (genre !== 'None' && genre !== null && genre !== '') {
 		const cardGenre = d.createElement('div')
 		cardGenre.setAttribute("class", "card-text")
 		cardGenre.textContent = `Genres: ${genre}`
 		cardBody.appendChild(cardGenre)
 	}
-	if (description !== 'None' && description !== null) {
+	if (description !== 'None' && description !== null && description !== '') {
 		const cardDescription = d.createElement('div')
 		cardDescription.setAttribute("class", "card-text")
 		cardDescription.textContent = `Description: ${description}`
