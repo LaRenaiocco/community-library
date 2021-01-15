@@ -1,5 +1,6 @@
 """ Helper functions for Community Library app"""
 from model import (db, User, Book, connect_to_db)
+from passlib.hash import argon2
 
 """Search Queries"""
 
@@ -148,6 +149,15 @@ def jsonify_new_book(book):
 
 
 """Prepare data for API's and Database"""
+
+def check_hashed_password(incoming_password, hashed_password):
+    """Checks if password matches encrypted hash"""
+
+    if argon2.verify(incoming_password, hashed_password):
+        return True
+    else:
+        return False
+
 
 def get_length_of_phone(phone):
     """check length of phone number for validity

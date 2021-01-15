@@ -34,15 +34,15 @@ def login_user():
     if user == None:
         flash('No account with this email exists. Please try again.')
         return redirect ('/')
-    else: 
-        if argon2.verify(incoming_password, user.password):
-            session['EMAIL'] = user.email
-            session['NAME'] = user.fname 
-            session['ID'] = user.user_id
-            return redirect (f'profile/{user.fname}')  
-        else:
-            flash('Incorrect Password. Please try again.')
-            return redirect ('/') 
+
+    if helper.check_hashed_password(incoming_password, user.password) == True:
+        session['EMAIL'] = user.email
+        session['NAME'] = user.fname 
+        session['ID'] = user.user_id
+        return redirect (f'profile/{user.fname}')  
+    else:
+        flash('Incorrect Password. Please try again.')
+        return redirect ('/') 
 
 
 @app.route('/logout')

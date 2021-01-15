@@ -4,6 +4,7 @@
 
 from unittest import TestCase
 from flask import session
+from passlib.hash import argon2
 from model import (connect_to_db, db, example_data, User, Book)
 from server import app
 import helper
@@ -11,7 +12,7 @@ import crud
 import api
 
 class FlaskTestsBasic(TestCase):
-    """Flask route path tests (no db)"""
+    """Flask route tests (no db)"""
 
     def setUp(self):
         """To do before every test"""
@@ -36,6 +37,63 @@ class FlaskTestsBasic(TestCase):
 
         result = self.client.get('/search')
         self.assertIn(b'Browse All Books', result.data)
+
+
+
+class FlaskTestsDatabase(TestCase):
+    """Flask route Tests (with db)"""
+
+    def setUp(self):
+        """To do before every test."""
+
+        self.client = app.test_client()
+        app.config['SECRET_KEY'] = 'key'
+        app.config['TESTING'] = True
+        connect_to_db(app, "postgresql:///apptestdb")
+        db.create_all()
+        example_data()
+
+        with self.client as c:
+            with c.session_transaction() as s:
+                s['ID'] = 1
+                s['NAME'] = 'Alex'
+                s['EMAIL'] = 'Alex@alex.com'
+
+    def tearDown(self):
+        """Do at end of every test."""
+
+        db.session.close()
+        db.drop_all()
+
+    def test_login(self):
+        """Test login"""
+
+        bad_email = self.client.post('/login', 
+                                    data={'email': 'Wrong@wrong.com', 
+                                        'password': 'wrong'},
+                                    follow_redirects=True)
+        # bad_password = self.client.post('/login',
+        #                             data={'email': 'Alex@alex.com', 
+        #                                 'password': 'wrong'},
+        #                             follow_redirects=True)
+        correct = self.client.post('/login', 
+                                    data={'email': 'Alex@alex.com', 
+                                        'password': 'test'},
+                                    follow_redirects=True)
+        self.assertIn(b'No account with this email exists', bad_email.data)
+        self.assertIn(b'Incorrect Password', bad_password.data)
+        self.assertIn(b'Add a book to your Library', correct.data)
+
+    def test_logout(self):
+        """Test logout"""
+
+        result = self.client.get('/logout', follow_redirects=True)
+        self.assertIn(b'a fullstack project by LaRena Iocco', result.data)
+
+    
+
+
+
 
 
 class CrudAndHelperTests(TestCase):
@@ -177,8 +235,6 @@ class CrudAndHelperTests(TestCase):
         book = Book.query.first()
         json = helper.jsonify_new_book(book)
         self.assertIn('title', json)
-
-
 
 
 

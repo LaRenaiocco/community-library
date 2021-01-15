@@ -18,6 +18,12 @@ button {
 }
 /* HOMEPAGE */
 
+.flash-msg {
+    text-align: center;
+    font-size: large;
+    background-color: #f58eaa;
+}
+
 .homepage-row {
     margin: 20px;
     margin-bottom: 30px;
