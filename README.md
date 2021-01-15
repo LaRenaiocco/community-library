@@ -42,6 +42,8 @@ A user does not need to be logged in to see the books available, but will need t
 
 ## <a name="future"></a>The Future of Community Library
 There are lots of new features planned for additional sprints:
+* Use a geolocating API to only show books within a certain distance of the user OR
+* Have regions/groups that users can join or create in their own community
 * Allow editing of profile information (including email, password)
 * Allow editing of book data (updating genres, description, etc)
 * Adding settings for availability of books
@@ -51,7 +53,7 @@ There are lots of new features planned for additional sprints:
 
 
 ## <a name="installation"></a>Installation
-To run Adventure Awaits on your own machine:
+To run Community Library on your own machine:
 
 Install PostgresQL (Mac OSX)
 
