@@ -135,8 +135,16 @@ class FlaskTestsDatabase(TestCase):
         result = self.client.get('/profile', follow_redirects=True)
         self.assertIn(b'Add a book to your Library', result.data)
 
-        
+    def test_profile_user(self):
+        """Test profile route with user name"""
 
+        result = self.client.get('/profile/Alex')
+        self.assertIn(b"Alex's Profile", result.data)
+
+    # def test_upload_image(self):
+    #     """Test image upload route"""
+
+    #     result = self.client.post('/upload-image')
 
 
 
@@ -280,6 +288,18 @@ class CrudAndHelperTests(TestCase):
         book = Book.query.first()
         json = helper.jsonify_new_book(book)
         self.assertIn('title', json)
+
+class BasicFunctions(TestCase):
+
+    def test_check_img_ext(self):
+
+        bad_file1 = helper.check_img_ext('file')
+        bad_file2 = helper.check_img_ext('file.txt')
+        good_file = helper.check_img_ext('file.jpeg')
+        self.assertFalse(bad_file1)
+        self.assertFalse(bad_file2)
+        self.assertTrue(good_file)
+
 
 
 
