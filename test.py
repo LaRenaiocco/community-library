@@ -33,6 +33,7 @@ class FlaskTestsBasic(TestCase):
 
     def test_search_page(self):
         """Test that search page renders"""
+
         result = self.client.get('/search')
         self.assertIn(b'Browse All Books', result.data)
 
@@ -81,33 +82,83 @@ class CrudAndHelperTests(TestCase):
     def test_delete_book(self):
         """Tests deleting of book from database"""
 
-        book_id = 1
-        crud.delete_book(book_id)
-        self.assertFalse(Book.query.get(book_id))
+        crud.delete_book(book_id=1)
+        self.assertFalse(Book.query.get(1))
 
     def test_get_user_by_email(self):
         """Tests get user by email database query"""
 
-        u = helper.get_user_by_email('Alex@alex.com')
+        u = helper.get_user_by_email(email='Alex@alex.com')
         self.assertIsNotNone(u.user_id)
 
     def test_get_user_phone(self):
         """Tests get user phone database query"""
 
-        p = helper.get_user_phone(1)
+        p = helper.get_user_phone(user_id=1)
         self.assertIsNotNone(p)
 
     def test_get_user_books_true(self):
         """ Tests get user's books database query with books"""
 
-        result = helper.get_user_books(1)
+        books = helper.get_user_books(user_id=1)
+        no_books = helper.get_user_books(user_id=2)
+        self.assertIsInstance(books, list)
+        self.assertIsInstance(no_books, str)
+
+    def test_check_user_matches_book_owner(self):
+        """Tests check that current user matches book owner"""
+
+        match = helper.check_user_matches_book_owner(book_id=1, user_id=1)
+        no_match = helper.check_user_matches_book_owner(book_id=1, user_id=2)
+        self.assertTrue(match)
+        self.assertFalse(no_match)
+
+    def test_get_all_book_data(self):
+        """ Tests get all book data database query"""
+
+        result = helper.get_all_book_data()
         self.assertIsInstance(result, list)
 
-    def test_get_user_books_false(self):
-        """Tests get user's books database query with no books"""
+    def test_search_database(self):
+        """Tests database search return type"""
+
+        match = helper.search_database(search_words='Jane', 
+                                        param='author')
+        no_match = helper.search_database(search_words='J.K. Rowling', 
+                                        param='author')
+        self.assertIsInstance(match, list)
+        self.assertIsInstance(no_match, str)
+
+    def test_search_title(self):
+        """Tests database query based on title"""
         
-        result = helper.get_user_books(2)
-        self.assertIsInstance(result, str)
+        result = helper.search_title(search_words='Pride and Prejudice')
+        book = result[0]
+        self.assertIsNotNone(book.user.user_id)
+
+    def test_search_author(self):
+        """Tests database query based on author"""
+        
+        result = helper.search_author(search_words='Jane')
+        book = result[0]
+        self.assertIsNotNone(book.user.user_id)
+
+    def test_search_genre(self):
+        """Tests database query based on genre"""
+        
+        result = helper.search_genre(search_words='fiction')
+        book = result[0]
+        self.assertIsNotNone(book.user.user_id)
+
+    def test_search_all(self):
+        """Tests database query of all fields"""
+        
+        result = helper.search_all(search_words='Jane')
+        book = result[0]
+        self.assertIsNotNone(book.user.user_id)
+
+
+
 
 
 
