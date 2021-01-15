@@ -38,6 +38,13 @@ class FlaskTestsBasic(TestCase):
         result = self.client.get('/search')
         self.assertIn(b'Browse All Books', result.data)
 
+    def test_borrow_book_fail(self):
+        """Tests that book borrow will fail if no user is logged in"""
+
+        result = self.client.post('/books/borrow-book',
+                                    data={'book': 1})
+        self.assertIn(b'You must be logged in', result.data)
+
 
 
 class FlaskTestsDatabase(TestCase):
@@ -84,6 +91,13 @@ class FlaskTestsDatabase(TestCase):
             return 'image deleted'
 
         api.cloudinary_delete_image = _mock_cloudinary_image_delete
+
+        def _mock_borrow_book_text(data):
+            """Mocks Twilio text call"""
+
+            return None 
+        
+        api.borrow_book_text = _mock_borrow_book_text
 
 
     def tearDown(self):
@@ -166,6 +180,13 @@ class FlaskTestsDatabase(TestCase):
                                     data={'book': 2})
         self.assertIn(b'Book Deleted', good.data)
         self.assertIn(b'You are not authorized', bad.data)
+
+    def test_borrow_book_success(self):
+        """Test borrow book route with mock Twilio call"""
+
+        result = self.client.post('/books/borrow-book',
+                                data={'book': 2})
+        self.assertIn(b'A borrow request has been sent', result.data)
 
     # NOT WORKING  DON'T KNOW HOW TO MOCK THE IMAGE FILE
     # def test_upload_image(self):
