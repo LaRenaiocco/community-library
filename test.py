@@ -66,7 +66,6 @@ class FlaskTestsDatabase(TestCase):
                 s['NAME'] = 'Alex'
                 s['EMAIL'] = 'Alex@alex.com'
 
-
         #Mock functions for API calls
         def _mock_check_hashed_password(password, hashed_password):
             """Mocks boolean return of hashed password check"""
@@ -98,7 +97,6 @@ class FlaskTestsDatabase(TestCase):
             return None 
         
         api.borrow_book_text = _mock_borrow_book_text
-
 
     def tearDown(self):
         """Do at end of every test."""
@@ -342,6 +340,11 @@ class CrudAndHelperTests(TestCase):
         json = helper.jsonify_new_book(book)
         self.assertIn('title', json)
 
+    def test_create_public_id_for_image(self):
+
+        result = helper.create_public_id_for_image(book_id=1)
+        self.assertIn('pride_and_prejudice_bj6ppu', result)
+
 class BasicFunctions(TestCase):
 
     def test_check_img_ext(self):
@@ -352,6 +355,8 @@ class BasicFunctions(TestCase):
         self.assertFalse(bad_file1)
         self.assertFalse(bad_file2)
         self.assertTrue(good_file)
+
+
 
 
 
