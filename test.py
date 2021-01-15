@@ -101,7 +101,41 @@ class FlaskTestsDatabase(TestCase):
         result = self.client.get('/logout', follow_redirects=True)
         self.assertIn(b'a fullstack project by LaRena Iocco', result.data)
 
-    
+    def test_create_user(self):
+        """Test create user route"""
+
+        bad_phone = self.client.post('/create-user',
+                                    data={'email': 'Test@test.com',
+                                        'password': 'test',
+                                        'fname': 'Testy',
+                                        'lname': 'McTester',
+                                        'phone': '111'},
+                                    follow_redirects=True)
+        dup_email = self.client.post('/create-user',
+                                    data={'email': 'Alex@alex.com',
+                                        'password': 'test',
+                                        'fname': 'Testy',
+                                        'lname': 'McTester',
+                                        'phone': '1234567890'},
+                                    follow_redirects=True)
+        new = self.client.post('/create-user',
+                                    data={'email': 'Test@test.com',
+                                        'password': 'test',
+                                        'fname': 'Testy',
+                                        'lname': 'McTester',
+                                        'phone': '1234567890'},
+                                    follow_redirects=True)
+        self.assertIn(b'Phone numbers must be 10 digits long', bad_phone.data)
+        self.assertIn(b'This email is already associated with an account', dup_email.data)
+        self.assertIn(b'Your account has been created', new.data)
+
+    def test_profile(self):
+        """Test profile re-route"""
+
+        result = self.client.get('/profile', follow_redirects=True)
+        self.assertIn(b'Add a book to your Library', result.data)
+
+        
 
 
 
