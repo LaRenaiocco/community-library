@@ -68,25 +68,36 @@ def example_data():
 
 
     user1 = User(email='Alex@alex.com', 
-				password='test', 
-				fname='Alex', 
+                password='test', 
+                fname='Alex', 
                 lname='Arbour', 
-				phone=YOUR_PHONE_NUMBER)
+                phone=YOUR_PHONE_NUMBER)
     user2 = User(email='Bobby@bobby.com', 
-				password='test', 
-				fname='Bobby',
+                password='test', 
+                fname='Bobby',
                 lname='Bobbington', 
-				phone=YOUR_PHONE_NUMBER)
+                phone=YOUR_PHONE_NUMBER)
+    user3 = User(email='Clare@clare.com',
+                password='test',
+                fname='Clare',
+                lname='Cramer',
+                phone=YOUR_PHONE_NUMBER)
     book1 = Book(title='Pride and Prejudice', 
-				author='Jane Austen', 
-				genre='fiction, classics',
-				description='Regency romantic comedy', 
-				image_url="https://res.cloudinary.com/rosieslibrary/image/upload/v1609811718/Books/pride_and_prejudice_bj6ppu.jpg",
-				owner=1,
-				available=True)
+                author='Jane Austen', 
+                genre='fiction, classics',
+                description='Regency romantic comedy', 
+                image_url="https://res.cloudinary.com/rosieslibrary/image/upload/v1609811718/Books/pride_and_prejudice_bj6ppu.jpg",
+                owner=1,
+                available=True)
+    book2 = Book(title='Persuasion',
+                author='Jane Austen',
+                genre='fiction, classics',
+                description='Regency romantic comedy',
+                image_url="https://res.cloudinary.com/rosieslibrary/image/upload/v1609811718/Books/persuasion_sr2b4j.jpg",
+                owner=3,
+                available=True)
 
-
-    db.session.add_all([user1, user2, book1])
+    db.session.add_all([user1, user2, user3, book1, book2])
     db.session.commit()
 
 

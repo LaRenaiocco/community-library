@@ -59,6 +59,8 @@ class FlaskTestsDatabase(TestCase):
                 s['NAME'] = 'Alex'
                 s['EMAIL'] = 'Alex@alex.com'
 
+
+        #Mock functions for API calls
         def _mock_check_hashed_password(password, hashed_password):
             """Mocks boolean return of hashed password check"""
 
@@ -68,6 +70,20 @@ class FlaskTestsDatabase(TestCase):
                 return False
 
         helper.check_hashed_password = _mock_check_hashed_password
+
+        def _mock_cloudinary_image_upload(image_data):
+            """Mocks Cloudinary API upload call"""
+
+            return 'fake url'
+
+        api.cloudinary_upload_image = _mock_cloudinary_image_upload
+
+        def _mock_cloudinary_image_delete(image_data):
+            """Mocks Cloudinary API delete call"""
+
+            return 'image deleted'
+
+        api.cloudinary_delete_image = _mock_cloudinary_image_delete
 
 
     def tearDown(self):
@@ -141,11 +157,27 @@ class FlaskTestsDatabase(TestCase):
         result = self.client.get('/profile/Alex')
         self.assertIn(b"Alex's Profile", result.data)
 
+    def test_delete_book_route(self):
+        """Test delete book route with DB delete and mock cloudinary delete"""
+
+        good = self.client.post('/delete-book',
+                                    data={'book': 1})
+        bad = self.client.post('/delete-book',
+                                    data={'book': 2})
+        self.assertIn(b'Book Deleted', good.data)
+        self.assertIn(b'You are not authorized', bad.data)
+
+    # NOT WORKING  DON'T KNOW HOW TO MOCK THE IMAGE FILE
     # def test_upload_image(self):
     #     """Test image upload route"""
 
-    #     result = self.client.post('/upload-image')
-
+    #     good_file = self.client.post('/upload-image',
+    #                                 data={'files': 'static/assets/favicon-32x32.png',
+    #                                         'title': 'Test Book',
+    #                                         'author': 'Test Author',
+    #                                         'genre': 'test genre',
+    #                                         'description': 'test description'})
+    #     self.assertIn(b'title', good_file.data)
 
 
 
