@@ -157,6 +157,27 @@ class CrudAndHelperTests(TestCase):
         book = result[0]
         self.assertIsNotNone(book.user.user_id)
 
+    def test_jsonify_book_search_data(self):
+        """Tests preparing book object data for JSON formatting"""
+
+        book_list = Book.query.all()
+        json_list = helper.jsonify_book_search_data(book_list)
+        self.assertIn('title', json_list[0])
+
+    def test_jsonify_user_book_data(self):
+        """Tests preparing book object data for JSON formatting"""
+
+        book_list = Book.query.all()
+        json_list = helper.jsonify_user_book_data(book_list)
+        self.assertIn('title', json_list[0])
+
+    def test_jsonify_new_book(self):
+        """Tests preparing book object data for JSON formatting"""
+
+        book = Book.query.first()
+        json = helper.jsonify_new_book(book)
+        self.assertIn('title', json)
+
 
 
 
