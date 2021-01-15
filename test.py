@@ -59,6 +59,17 @@ class FlaskTestsDatabase(TestCase):
                 s['NAME'] = 'Alex'
                 s['EMAIL'] = 'Alex@alex.com'
 
+        def _mock_check_hashed_password(password, hashed_password):
+            """Mocks boolean return of hashed password check"""
+
+            if password == 'test':
+                return True
+            else:
+                return False
+
+        helper.check_hashed_password = _mock_check_hashed_password
+
+
     def tearDown(self):
         """Do at end of every test."""
 
@@ -72,10 +83,10 @@ class FlaskTestsDatabase(TestCase):
                                     data={'email': 'Wrong@wrong.com', 
                                         'password': 'wrong'},
                                     follow_redirects=True)
-        # bad_password = self.client.post('/login',
-        #                             data={'email': 'Alex@alex.com', 
-        #                                 'password': 'wrong'},
-        #                             follow_redirects=True)
+        bad_password = self.client.post('/login',
+                                    data={'email': 'Alex@alex.com', 
+                                        'password': 'wrong'},
+                                    follow_redirects=True)
         correct = self.client.post('/login', 
                                     data={'email': 'Alex@alex.com', 
                                         'password': 'test'},
