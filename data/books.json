@@ -527,7 +527,7 @@
         "genre": "fiction, fantasy, young adult, ya",
         "description": "None",
         "image_url": "https://res.cloudinary.com/rosieslibrary/image/upload/v1609811720/Books/the_woman_who_rides_like_a_man_yozrel.jpg",
-        "owner": "11",
+        "owner": "10",
         "available": "True"
     },
     {
@@ -545,7 +545,7 @@
         "genre": "nonfiction, autobiography, memoir",
         "description": "None",
         "image_url": "https://res.cloudinary.com/rosieslibrary/image/upload/v1609811721/Books/untamed_ad3dvj.jpg",
-        "owner": "11",
+        "owner": "1",
         "available": "True"
     },
     {
@@ -554,7 +554,7 @@
         "genre": "fiction, historical fiction, fantasy, LGBT",
         "description": "Queer librarians in the wild west fight the patriarchy.",
         "image_url": "https://res.cloudinary.com/rosieslibrary/image/upload/v1609811721/Books/upright_women_wanted_jis0b5.jpg",
-        "owner": "11",
+        "owner": "9",
         "available": "True"
     },
     {
@@ -563,7 +563,7 @@
         "genre": "fiction, fantasy",
         "description": "None",
         "image_url": "https://res.cloudinary.com/rosieslibrary/image/upload/v1609811721/Books/the_wise_mans_fear_qxtoos.jpg",
-        "owner": "11",
+        "owner": "8",
         "available": "True"
     },
     {
@@ -572,7 +572,7 @@
         "genre": "nonfiction, memoir, autobiography, essays",
         "description": "None",
         "image_url": "https://res.cloudinary.com/rosieslibrary/image/upload/v1609811721/Books/why_not_me_l7a55d.jpg",
-        "owner": "11",
+        "owner": "3",
         "available": "True"
     },
     {
@@ -581,7 +581,7 @@
         "genre": "fiction, young adult, ya",
         "description": "None",
         "image_url": "https://res.cloudinary.com/rosieslibrary/image/upload/v1609811721/Books/we_are_okay_ifotd6.jpg",
-        "owner": "11",
+        "owner": "2",
         "available": "True"
     },
     {
@@ -590,7 +590,7 @@
         "genre": "fiction, young adult, ya, fantasy",
         "description": "None",
         "image_url": "https://res.cloudinary.com/rosieslibrary/image/upload/v1609811721/Books/wilder_girls_wqebxd.jpg",
-        "owner": "11",
+        "owner": "4",
         "available": "True"
     },
     {
@@ -599,7 +599,7 @@
         "genre": "nonfiction, autobiography, memoir",
         "description": "None",
         "image_url": "https://res.cloudinary.com/rosieslibrary/image/upload/v1609811721/Books/yes_please_jg4b5a.jpg",
-        "owner": "11",
+        "owner": "5",
         "available": "True"
     },
     {
@@ -608,7 +608,7 @@
         "genre": "fiction, historical fiction",
         "description": "None",
         "image_url": "https://res.cloudinary.com/rosieslibrary/image/upload/v1609811721/Books/wildthorn_vam3qq.jpg",
-        "owner": "11",
+        "owner": "10",
         "available": "True"
     }
 ]
