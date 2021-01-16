@@ -196,4 +196,7 @@ def send_book_request_text():
 
 if __name__ == '__main__':
     connect_to_db(app)
-    app.run(host='0.0.0.0', debug=True)
+    # turn this OFF for development updates
+    app.run()
+    # turn this ON for development updates
+    # app.run(host='0.0.0.0', debug=True)
